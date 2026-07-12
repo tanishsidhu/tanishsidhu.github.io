@@ -264,6 +264,12 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
     .nav-cta {
       font-size: 13px;
       font-weight: 500;
@@ -278,6 +284,24 @@
       transition: background 0.2s, transform 0.2s;
     }
     .nav-cta:hover { background: var(--accent-deep); transform: translateY(-1px); }
+    .mode-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      font-size: 16px;
+      line-height: 1;
+      text-decoration: none;
+      color: var(--text);
+      opacity: 0.85;
+      border-radius: 8px;
+      transition: opacity 0.2s, background 0.2s;
+    }
+    .mode-toggle:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.06);
+    }
 
     /* ── Hero ── */
     .hero {
@@ -687,9 +711,12 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#education">Education</a></li>
     </ul>
-    <a href="assets/docs/Tanish_Resume.pdf" class="nav-cta" download>
-      <i class="ti ti-download" aria-hidden="true"></i> Resume
-    </a>
+    <div class="nav-actions">
+      <a href="assets/docs/Tanish_Resume.pdf" class="nav-cta" download>
+        <i class="ti ti-download" aria-hidden="true"></i> Resume
+      </a>
+      <a class="mode-toggle" href="minimal/" data-mode="minimal" title="Minimalist" aria-label="Minimalist">▫</a>
+    </div>
   </nav>
 
   <!-- ── Hero (About merged in) ── -->
@@ -1243,5 +1270,6 @@
       langEls.forEach(function (el) { langObs.observe(el); });
     })();
   </script>
+  <script src="assets/js/mode-toggle.js"></script>
 </body>
 </html>

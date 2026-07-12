@@ -1,0 +1,298 @@
+@font-face {
+  font-display: swap;
+  font-family: 'OpenAI Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://cdn.openai.com/common/fonts/openai-sans/v2/OpenAISans-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'OpenAI Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://cdn.openai.com/common/fonts/openai-sans/v2/OpenAISans-Medium.woff2) format('woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'OpenAI Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://cdn.openai.com/common/fonts/openai-sans/v2/OpenAISans-Semibold.woff2) format('woff2');
+}
+
+:root {
+  --bg: #0a0a0a;
+  --text: #f5f3ee;
+  --muted: rgba(236, 234, 228, 0.55);
+  --faint: rgba(236, 234, 228, 0.4);
+  --accent: #e8914a;
+  --page-max: 42rem;
+  --page-x: 1.5rem;
+  --page-y: 2.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--muted);
+  font-family: 'OpenAI Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+.page {
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--page-y) var(--page-x) 4rem;
+  position: relative;
+}
+
+.page-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  min-height: 2rem;
+  gap: 1rem;
+}
+
+.page-top--end {
+  justify-content: flex-end;
+}
+
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  text-decoration: none;
+  opacity: 0.85;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.mode-toggle:hover {
+  opacity: 1;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.back {
+  display: inline-block;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.name {
+  display: block;
+  color: var(--text);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 1.5rem;
+}
+
+.bio p {
+  margin-bottom: 1rem;
+  max-width: 38rem;
+}
+
+.bio p:last-child {
+  margin-bottom: 0;
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.section {
+  margin-top: 3rem;
+}
+
+.section-title {
+  color: var(--text);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+}
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.link-list a {
+  display: block;
+  width: fit-content;
+}
+
+.page-title {
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.page-sub {
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.block {
+  margin-bottom: 2.25rem;
+}
+
+.block-label {
+  color: var(--text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin-bottom: 0.85rem;
+}
+
+.role {
+  margin-bottom: 0.85rem;
+}
+
+.role-title {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.role-meta {
+  color: var(--faint);
+  font-size: 0.875rem;
+}
+
+.contrib {
+  margin-bottom: 1.25rem;
+}
+
+.contrib-title {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.contrib-body {
+  color: var(--muted);
+}
+
+.project {
+  margin-bottom: 1.75rem;
+  scroll-margin-top: 1.5rem;
+}
+
+.project-name {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.35rem;
+}
+
+.project-desc {
+  margin-bottom: 0.4rem;
+}
+
+.project-tags {
+  color: var(--faint);
+  font-size: 0.8125rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skill-group {
+  margin-bottom: 1.75rem;
+}
+
+.skill-group-title {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.cert {
+  margin-bottom: 1rem;
+}
+
+.cert-name {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.cert-issuer {
+  color: var(--faint);
+  font-size: 0.875rem;
+}
+
+.edu {
+  margin-bottom: 1.75rem;
+}
+
+.edu-school {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.edu-deg {
+  margin-top: 0.15rem;
+}
+
+.edu-meta {
+  color: var(--faint);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --page-x: 2rem;
+    --page-y: 3.5rem;
+  }
+
+  .section {
+    margin-top: 4rem;
+  }
+}
