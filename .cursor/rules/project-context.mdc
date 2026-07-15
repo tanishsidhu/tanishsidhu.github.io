@@ -1,0 +1,8 @@
+---
+description: Read the tanishsidhu.github.io project context before significant work.
+alwaysApply: true
+---
+
+Global preferences are configured through Cursor User Rules. Before significant work, read the five files in `/Users/tanishpreetsidhu/Documents/Obsidian/Context/Projects/tanishsidhu.github.io/`: `PROJECT.md`, `ARCHITECTURE.md`, `CURRENT_STATE.md`, `DECISIONS.md`, and `HANDOFF.md`.
+
+Do not read unrelated personal vault notes. Keep the project context current after substantial work and verify its recorded commit against this repository before claiming it is current.
