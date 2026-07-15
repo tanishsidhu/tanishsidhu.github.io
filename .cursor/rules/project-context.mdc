@@ -5,4 +5,4 @@ alwaysApply: true
 
 Global preferences are configured through Cursor User Rules. Before significant work, read the five files in `/Users/tanishpreetsidhu/Documents/Obsidian/Context/Projects/tanishsidhu.github.io/`: `PROJECT.md`, `ARCHITECTURE.md`, `CURRENT_STATE.md`, `DECISIONS.md`, and `HANDOFF.md`.
 
-Do not read unrelated personal vault notes. Keep the project context current after substantial work and verify its recorded commit against this repository before claiming it is current.
+Do not read unrelated personal vault notes. Before ending substantial project work, update `CURRENT_STATE.md` with progress, blockers, next steps, verification, and the verified Git commit; append meaningful decisions; update architecture or scope notes when applicable; and update `HANDOFF.md`. Name the context files updated in the final report. If this cannot be done, explain why and do not claim the handoff is current.

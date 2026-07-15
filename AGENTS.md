@@ -16,7 +16,7 @@ Only these project files and the canonical global preferences are in scope. Do n
 
 ## Context maintenance
 
-After substantial work, update `CURRENT_STATE.md`; append meaningful decisions to `DECISIONS.md`; update `ARCHITECTURE.md` for design changes; update `PROJECT.md` only for scope or behavior changes; and record the verified Git commit. Never rewrite historical decisions silently. Never claim documentation is current unless it was checked against this repository.
+For substantial project work, complete the context handoff before ending the task: update `CURRENT_STATE.md` with completed work, blockers, next steps, verification, and the verified Git commit; append meaningful decisions to `DECISIONS.md`; update `ARCHITECTURE.md` for design changes; update `PROJECT.md` only for scope or behavior changes; and update `HANDOFF.md` with the safest next action. Name the context files updated in the final report. If they cannot be updated, explain why and do not claim that the handoff is current. Never rewrite historical decisions silently.
 
 ## Remote fallback
 
