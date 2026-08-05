@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,1257 +19,249 @@
   <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@600&family=Noto+Sans+Gurmukhi:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+Devanagari:wght@600&amp;family=Noto+Sans+Gurmukhi:wght@600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <style>
-    @font-face { font-display: swap; font-family: 'OpenAI Sans'; font-style: normal; font-weight: 400; src: url(https://cdn.openai.com/common/fonts/openai-sans/v2/OpenAISans-Regular.woff2) format('woff2'); }
-    @font-face { font-display: swap; font-family: 'OpenAI Sans'; font-style: normal; font-weight: 500; src: url(https://cdn.openai.com/common/fonts/openai-sans/v2/OpenAISans-Medium.woff2) format('woff2'); }
-    @font-face { font-display: swap; font-family: 'OpenAI Sans'; font-style: normal; font-weight: 600; src: url(https://cdn.openai.com/common/fonts/openai-sans/v2/OpenAISans-Semibold.woff2) format('woff2'); }
-    @font-face { font-display: swap; font-family: 'OpenAI Sans'; font-style: normal; font-weight: 700; src: url(https://cdn.openai.com/common/fonts/openai-sans/v2/OpenAISans-Bold.woff2) format('woff2'); }
-
-    :root {
-      --bg: #0a0a0a;
-      --text: #F5F3EE;
-      --muted: rgba(236,234,228,0.55);
-      --faint: rgba(236,234,228,0.4);
-      --line: rgba(255,255,255,0.1);
-      --hair: rgba(255,255,255,0.12);
-      --accent: #E8914A;
-      --accent-deep: #DA7756;
-      --card: rgba(255,255,255,0.04);
-      --card-hover: rgba(255,255,255,0.06);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'OpenAI Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* ── Ambient orange glow + water reflection ── */
-    .glow {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
-      filter: url(#water-ripple);
-    }
-    .glow::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 120% 80% at 50% 110%, rgba(232,145,74,0.16), transparent 55%);
-      animation: water-swell 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-    }
-    .blob {
-      position: absolute;
-      filter: blur(90px);
-      will-change: transform, border-radius;
-    }
-    .blob.b1 { width: 380px; height: 380px; top: -60px; left: -40px;
-      background: radial-gradient(circle, rgba(232,145,74,0.46), transparent 70%);
-      border-radius: 62% 38% 58% 42% / 48% 58% 42% 52%;
-      animation: water-drift-1 7s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, blob-wave-1 5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
-    .blob.b2 { width: 320px; height: 320px; top: 32%; right: -60px;
-      background: radial-gradient(circle, rgba(218,119,86,0.38), transparent 70%);
-      border-radius: 48% 52% 64% 36% / 58% 42% 56% 44%;
-      animation: water-drift-2 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, blob-wave-2 5.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
-    .blob.b3 { width: 300px; height: 300px; top: 60%; left: -40px;
-      background: radial-gradient(circle, rgba(232,145,74,0.34), transparent 70%);
-      border-radius: 54% 46% 40% 60% / 44% 56% 48% 52%;
-      animation: water-drift-3 7.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, blob-wave-3 4.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
-    .blob.b4 { width: 420px; height: 420px; bottom: -120px; right: 10%;
-      background: radial-gradient(circle, rgba(218,119,86,0.32), transparent 70%);
-      border-radius: 44% 56% 52% 48% / 62% 38% 50% 50%;
-      animation: water-drift-4 8.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite, blob-wave-4 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
-    @keyframes water-drift-1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      20% { transform: translate(44px, 14px) scale(1.06); }
-      40% { transform: translate(72px, 38px) scale(0.97); }
-      60% { transform: translate(36px, 56px) scale(1.04); }
-      80% { transform: translate(-26px, 30px) scale(1.02); }
-    }
-    @keyframes water-drift-2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(-48px, 22px) scale(1.07); }
-      50% { transform: translate(-78px, 34px) scale(0.96); }
-      75% { transform: translate(-30px, -42px) scale(1.03); }
-    }
-    @keyframes water-drift-3 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      20% { transform: translate(42px, -32px) scale(1.05); }
-      45% { transform: translate(74px, 8px) scale(0.98); }
-      70% { transform: translate(48px, 44px) scale(1.04); }
-      85% { transform: translate(12px, 24px) scale(1.01); }
-    }
-    @keyframes water-drift-4 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      30% { transform: translate(-42px, -52px) scale(1.08); }
-      55% { transform: translate(-18px, -28px) scale(0.97); }
-      80% { transform: translate(28px, -22px) scale(1.03); }
-    }
-    @keyframes blob-wave-1 {
-      0%, 100% { border-radius: 62% 38% 58% 42% / 48% 58% 42% 52%; }
-      50% { border-radius: 44% 56% 48% 52% / 58% 42% 60% 40%; }
-    }
-    @keyframes blob-wave-2 {
-      0%, 100% { border-radius: 48% 52% 64% 36% / 58% 42% 56% 44%; }
-      50% { border-radius: 58% 42% 46% 54% / 40% 60% 44% 56%; }
-    }
-    @keyframes blob-wave-3 {
-      0%, 100% { border-radius: 54% 46% 40% 60% / 44% 56% 48% 52%; }
-      50% { border-radius: 40% 60% 56% 44% / 52% 48% 38% 62%; }
-    }
-    @keyframes blob-wave-4 {
-      0%, 100% { border-radius: 44% 56% 52% 48% / 62% 38% 50% 50%; }
-      50% { border-radius: 56% 44% 38% 62% / 46% 54% 58% 42%; }
-    }
-    @keyframes water-swell {
-      0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.75; }
-      50% { transform: translateY(-4%) scaleY(1.12); opacity: 1; }
-    }
-
-    /* ── Lighter surface waves ── */
-    .light-waves {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .wave-band {
-      position: absolute;
-      left: -30%;
-      width: 160%;
-      height: 42%;
-      border-radius: 50%;
-      filter: blur(20px);
-      opacity: 0.9;
-      will-change: transform;
-    }
-    .wave-band.w1 {
-      top: 6%;
-      background: radial-gradient(ellipse 58% 44% at 50% 50%, rgba(255,190,120,0.42) 0%, rgba(232,145,74,0.18) 38%, transparent 68%);
-      animation: light-wave-1 3.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-    }
-    .wave-band.w2 {
-      top: 32%;
-      background: radial-gradient(ellipse 62% 40% at 50% 50%, rgba(255,175,95,0.36) 0%, rgba(218,119,86,0.16) 42%, transparent 70%);
-      animation: light-wave-2 4.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-      opacity: 0.82;
-    }
-    .wave-band.w3 {
-      top: 56%;
-      background: radial-gradient(ellipse 54% 42% at 50% 50%, rgba(255,185,110,0.38) 0%, rgba(232,145,74,0.17) 38%, transparent 68%);
-      animation: light-wave-3 4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-      opacity: 0.78;
-    }
-    @keyframes light-wave-1 {
-      0%, 100% { transform: translate3d(-10%, 0, 0) scale(1); }
-      50% { transform: translate3d(11%, -6%, 0) scale(1.1); }
-    }
-    @keyframes light-wave-2 {
-      0%, 100% { transform: translate3d(9%, 3%, 0) scale(1.04); }
-      50% { transform: translate3d(-12%, -5%, 0) scale(1.12); }
-    }
-    @keyframes light-wave-3 {
-      0%, 100% { transform: translate3d(-8%, 4%, 0) scale(1); }
-      50% { transform: translate3d(10%, -4%, 0) scale(1.08); }
-    }
-    .water-filters {
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: hidden;
-    }
-
-    /* ── Scroll fade ── */
-    html.js .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    html.js .fade.in { opacity: 1; transform: none; }
-
-    hr.div { width: 100%; border: none; border-top: 0.5px solid var(--line); }
-
-    .sec { padding: 56px 32px; max-width: 760px; margin: 0 auto; }
-
-    .sec-label {
-      font-size: 13px;
-      letter-spacing: 0.4px;
-      font-weight: 500;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    a { color: inherit; }
-
-    /* ── Frosted card base ── */
-    .card {
-      background: var(--card);
-      border: 0.5px solid var(--hair);
-      border-radius: 12px;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
-    }
-    .card:hover,
-    html.js .card.fade.in:hover {
-      transform: translateY(-4px);
-      border-color: rgba(232,145,74,0.5);
-      background: var(--card-hover);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.22), 0 0 0 1px rgba(232,145,74,0.1);
-    }
-
-    .accent { color: var(--accent); }
-
-    /* ── Navigation ── */
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 32px;
-      border-bottom: 0.5px solid var(--line);
-      background: rgba(10,10,10,0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 13px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-    .nav-cta {
-      font-size: 13px;
-      font-weight: 500;
-      padding: 7px 16px;
-      border-radius: 100px;
-      background: var(--accent);
-      color: #0a0a0a;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .nav-cta:hover { background: var(--accent-deep); transform: translateY(-1px); }
-    .mode-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      font-size: 16px;
-      line-height: 1;
-      text-decoration: none;
-      color: var(--text);
-      opacity: 0.85;
-      border-radius: 8px;
-      transition: opacity 0.2s, background 0.2s;
-    }
-    .mode-toggle:hover {
-      opacity: 1;
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    /* ── Hero ── */
-    .hero {
-      padding: 96px 32px 80px;
-      max-width: 820px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .hero-photo {
-      width: 128px;
-      height: 128px;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center 20%;
-      border: 1px solid var(--hair);
-      box-shadow: 0 0 0 5px rgba(232,145,74,0.08), 0 8px 30px rgba(0,0,0,0.4);
-      margin: 0 auto 32px;
-      display: block;
-    }
-    .hero-eyebrow {
-      font-family: 'OpenAI Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-    .hero-title { min-height: 1.08em; }
-    .tw-cursor {
-      display: inline-block;
-      width: 3px;
-      height: 0.82em;
-      background: var(--accent);
-      margin-left: 4px;
-      vertical-align: -0.06em;
-      animation: blink 0.9s step-end infinite;
-    }
-    .tw-cursor.done { animation: blink 0.9s step-end infinite; }
-    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-    .hero-title {
-      font-size: 44px;
-      font-weight: 600;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      margin-bottom: 28px;
-      color: var(--text);
-    }
-    .hero-sub {
-      font-size: 17px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 600px;
-      margin: 0 auto 36px;
-    }
-    .btn-p {
-      font-size: 14px;
-      font-weight: 500;
-      padding: 12px 26px;
-      background: var(--accent);
-      color: #0a0a0a;
-      border-radius: 100px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-p:hover { background: var(--accent-deep); transform: translateY(-2px); }
-
-    /* ── Experience ── */
-    .exp-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    .odessa-wrap {
-      width: 52px;
-      height: 52px;
-      border-radius: 12px;
-      background: rgba(0,181,184,0.08);
-      border: 0.5px solid rgba(0,181,184,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .odessa-wrap img { width: 38px; height: auto; }
-    .exp-co-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 2px; letter-spacing: -0.01em; }
-    .exp-co-meta { font-size: 13px; color: var(--muted); }
-
-    .exp-layout {
-      display: grid;
-      grid-template-columns: 230px 1fr;
-      gap: 32px;
-      align-items: start;
-    }
-    .track-label, .ach-label {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--faint);
-      margin-bottom: 18px;
-    }
-    .role-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding-bottom: 22px;
-      position: relative;
-    }
-    .role-row:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      left: 4.5px;
-      top: 14px;
-      width: 1px;
-      height: 100%;
-      background: var(--line);
-    }
-    .rdot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 4px;
-      background: rgba(236,234,228,0.3);
-      z-index: 1;
-    }
-    .rdot.current {
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(232,145,74,0.15), 0 0 12px rgba(232,145,74,0.6);
-    }
-    .role-title { font-size: 14px; font-weight: 500; color: var(--text); }
-    .role-dept { font-size: 12px; color: var(--faint); margin-top: 1px; }
-    .role-date { font-size: 12px; color: var(--muted); margin-top: 3px; }
-
-    .ach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; grid-auto-rows: 1fr; }
-    .ac { padding: 16px; }
-    .ac.banner { margin-bottom: 12px; }
-    .ac-ico { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .ac-ico i { font-size: 17px; color: var(--accent); }
-    .ac-stat { font-size: 20px; font-weight: 600; color: var(--accent); letter-spacing: -0.02em; }
-    .ac-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
-    .ac-body { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
-
-    /* Client logo row */
-    .client-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; align-items: center; }
-    .client-tile {
-      background: #fff;
-      border-radius: 7px;
-      height: 30px;
-      padding: 0 10px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .client-tile img { height: 18px; width: auto; max-width: 88px; object-fit: contain; display: block; }
-    .client-tile.hpe img { height: 13px; max-width: 72px; }
-    .client-tile.ge img { height: 20px; max-width: 20px; }
-    .client-tile.td img { height: 22px; max-width: 22px; }
-    .client-tile.canon img { height: 13px; max-width: 64px; }
-    .client-tile.haydock img { height: 14px; max-width: 78px; }
-    .client-tile.asset-alliance img { height: 14px; max-width: 92px; }
-    .client-tile.volvo img { height: 20px; max-width: 20px; }
-    .client-chip {
-      font-size: 11px;
-      color: var(--muted);
-      border: 0.5px solid var(--hair);
-      border-radius: 7px;
-      padding: 0 12px;
-      height: 30px;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    /* ── Projects ── */
-    .proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-    .proj-card { padding: 22px 20px; display: flex; flex-direction: column; }
-    .proj-ico {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: rgba(232,145,74,0.1);
-      border: 0.5px solid rgba(232,145,74,0.22);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 14px; font-size: 15px;
-    }
-    .proj-ico i { color: var(--accent); }
-    .proj-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 7px; letter-spacing: -0.01em; }
-    .proj-desc { font-size: 13px; color: var(--muted); line-height: 1.6; flex: 1; }
-    .proj-tags { font-size: 11px; color: var(--accent); margin-top: 14px; font-weight: 500; }
-    .plinks { display: flex; gap: 8px; margin-top: 12px; }
-    .plink {
-      font-size: 12px;
-      color: #0ABAB5;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      border: 0.5px solid rgba(10,186,181,0.3);
-      border-radius: 6px;
-      padding: 4px 10px;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-    }
-    .plink:hover { border-color: rgba(10,186,181,0.6); color: #81D8D0; background: rgba(10,186,181,0.06); }
-
-    /* ── Education ── */
-    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .edu-card { padding: 18px 16px; display: flex; flex-direction: column; }
-    .edu-ico {
-      width: 34px; height: 34px;
-      border-radius: 9px;
-      background: rgba(232,145,74,0.1);
-      border: 0.5px solid rgba(232,145,74,0.22);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 12px; font-size: 16px;
-    }
-    .edu-ico i { color: var(--accent); }
-    .edu-school-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; min-height: 2.1em; display: flex; align-items: flex-start; }
-    .edu-ytag { font-size: 11px; color: var(--faint); }
-    .edu-deg { font-size: 12.5px; color: var(--muted); line-height: 1.45; margin: 10px 0 12px; min-height: 2.1em; }
-    .edu-foot { margin-top: auto; }
-    .cgpa-row { display: flex; align-items: baseline; gap: 8px; }
-    .cgpa-lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); }
-    .cgpa-val { font-size: 16px; font-weight: 600; color: var(--accent); letter-spacing: -0.01em; }
-    .edu-loc { display: flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 11.5px; color: var(--faint); }
-
-    /* ── Skills ── */
-    .skill-cats { display: flex; flex-direction: column; gap: 12px; }
-    .cat-card { padding: 18px 20px; position: relative; }
-    .cat-hd { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-    .cat-ico {
-      width: 34px; height: 34px; border-radius: 9px;
-      background: rgba(232,145,74,0.1);
-      border: 0.5px solid rgba(232,145,74,0.22);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .cat-ico i { color: var(--accent); font-size: 16px; }
-    .cat-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; letter-spacing: -0.01em; }
-    .cat-count {
-      font-size: 16px; font-weight: 600; color: var(--accent);
-      letter-spacing: -0.02em;
-    }
-    .chips-row { display: flex; flex-wrap: wrap; gap: 7px; }
-    .sk {
-      font-size: 12px;
-      color: var(--muted);
-      border-radius: 7px;
-      padding: 5px 11px;
-      border: 0.5px solid var(--hair);
-      background: rgba(255,255,255,0.02);
-      display: inline-flex; align-items: center; gap: 6px;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .sk:hover { border-color: rgba(232,145,74,0.4); color: var(--text); }
-    .sk i { font-size: 13px; }
-
-    /* ── Languages ── */
-    .langs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .lang-card { padding: 18px 12px; text-align: center; }
-    .lang-flag { font-size: 26px; margin-bottom: 10px; display: block; }
-    .lang-name { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 4px; min-height: 1.3em; }
-    .lang-name .tw-cursor { height: 0.9em; width: 2px; }
-    .lang-lvl { font-size: 11px; color: var(--faint); }
-    .lang-name[lang="hi"] { font-family: 'Noto Sans Devanagari', 'OpenAI Sans', sans-serif; }
-    .lang-name[lang="pa"] { font-family: 'Noto Sans Gurmukhi', 'OpenAI Sans', sans-serif; }
-
-    /* ── Awards & Certs ── */
-    .certs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .cert {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 16px;
-    }
-    .cert-logo {
-      width: 30px; height: 30px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.04);
-      border: 0.5px solid var(--hair);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .cert-logo img { width: 18px; height: 18px; }
-    .cert-info { display: flex; flex-direction: column; }
-    .cert-name { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.3; }
-    .cert-issuer { font-size: 11px; color: var(--muted); margin-top: 1px; }
-
-    /* ── Contact ── */
-    .contact-block { padding: 56px 32px; text-align: center; }
-    .contact-title {
-      font-size: 38px; font-weight: 600;
-      letter-spacing: -0.02em; margin-bottom: 16px; color: var(--text);
-    }
-    .contact-tags { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
-    .ctag {
-      font-size: 12px;
-      color: var(--accent);
-      background: rgba(232,145,74,0.08);
-      border: 0.5px solid rgba(232,145,74,0.25);
-      border-radius: 100px;
-      padding: 5px 14px;
-      display: inline-flex; align-items: center; gap: 6px;
-    }
-    .ctag.green {
-      color: #4ade80;
-      background: rgba(74,222,128,0.10);
-      border-color: rgba(74,222,128,0.35);
-    }
-    .cdot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
-    .cdot.green-dot { background: #4ade80; animation: pulse-green 2s ease-in-out infinite; }
-    @keyframes pulse-green { 0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); } 50% { box-shadow: 0 0 0 5px rgba(74,222,128,0); } }
-    .c-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    .c-link {
-      font-size: 13px;
-      padding: 10px 18px;
-      border: 0.5px solid var(--hair);
-      border-radius: 100px;
-      color: var(--text);
-      display: inline-flex; align-items: center; gap: 8px;
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
-    }
-    .c-link:hover { border-color: rgba(232,145,74,0.5); background: rgba(232,145,74,0.06); transform: translateY(-2px); }
-    .c-link svg { width: 18px; height: 18px; flex-shrink: 0; }
-
-    /* ── Footer ── */
-    .footer { padding: 28px 32px; border-top: 0.5px solid var(--line); display: flex; justify-content: center; }
-    .footer-l { font-size: 12px; color: var(--faint); }
-
-    /* ── Responsive ── */
-    @media (max-width: 680px) {
-      .nav-links { display: none; }
-      .hero { padding: 64px 24px 56px; }
-      .hero-title { font-size: 36px; }
-      .hero-sub { font-size: 15px; }
-      .sec { padding: 44px 24px; }
-      .exp-layout { grid-template-columns: 1fr; gap: 28px; }
-      .ach-grid { grid-template-columns: 1fr; }
-      .ac.full { grid-column: 1; }
-      .proj-grid { grid-template-columns: 1fr; }
-      .edu-grid { grid-template-columns: 1fr; }
-      .langs-grid { grid-template-columns: repeat(2, 1fr); }
-      .certs-list { grid-template-columns: 1fr; }
-      .contact-title { font-size: 30px; }
-      .nav { padding: 14px 20px; }
-    }
-
-    /* ── Reduced motion ── */
-    @media (prefers-reduced-motion: reduce) {
-      .glow { filter: none; }
-      .glow::after { animation: none !important; }
-      .blob { animation: none !important; }
-      .wave-band { animation: none !important; }
-      .card:hover,
-      html.js .card.fade.in:hover { transform: none !important; box-shadow: none !important; }
-      html.js .fade { opacity: 1 !important; transform: none !important; transition: none !important; }
-      html { scroll-behavior: auto; }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/site.css?v=20260805v">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <svg class="water-filters" aria-hidden="true" focusable="false">
-    <defs>
-      <filter id="water-ripple" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
-        <feTurbulence type="fractalNoise" baseFrequency="0.003 0.008" numOctaves="2" seed="3" result="noise">
-          <animate attributeName="baseFrequency" dur="8s" repeatCount="indefinite" calcMode="spline"
-            keyTimes="0;0.25;0.5;0.75;1"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"
-            values="0.003 0.008;0.0042 0.010;0.0028 0.007;0.0036 0.009;0.003 0.008"/>
-          <animate attributeName="seed" dur="6s" repeatCount="indefinite" calcMode="spline"
-            keyTimes="0;0.33;0.66;1"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1; 0.42 0 0.58 1"
-            values="1;3;2;1"/>
-        </feTurbulence>
-        <feGaussianBlur in="noise" stdDeviation="14" result="smoothNoise"/>
-        <feDisplacementMap in="SourceGraphic" in2="smoothNoise" scale="48" xChannelSelector="R" yChannelSelector="G">
-          <animate attributeName="scale" dur="7s" repeatCount="indefinite" calcMode="spline"
-            keyTimes="0;0.5;1"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
-            values="40;52;40"/>
-        </feDisplacementMap>
-      </filter>
-    </defs>
-  </svg>
-
-  <!-- ── Ambient orange glow ── -->
-  <div class="glow" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="blob b4"></div>
-  </div>
-
-  <div class="light-waves" aria-hidden="true">
-    <span class="wave-band w1"></span>
-    <span class="wave-band w2"></span>
-    <span class="wave-band w3"></span>
-  </div>
-
-  <!-- ── Navigation ── -->
-  <nav class="nav">
-    <div class="nav-logo">Tanishpreet Singh Sidhu</div>
-    <ul class="nav-links">
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-    </ul>
+  <nav class="site-nav" aria-label="Main navigation">
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🌙</span></button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+      <span class="sr-only">Toggle navigation</span>
+      <i class="ti ti-menu-2" aria-hidden="true"></i>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+    </div>
     <div class="nav-actions">
-      <a href="assets/docs/Tanish_Resume.pdf" class="nav-cta" download>
-        <i class="ti ti-download" aria-hidden="true"></i> Resume
-      </a>
-      <a class="mode-toggle" href="minimal/" data-mode="minimal" title="Minimalist" aria-label="Minimalist">▫</a>
+      <a class="nav-resume" href="assets/docs/Tanish_Resume.pdf" download>Résumé (CV) <i class="ti ti-download" aria-hidden="true"></i></a>
     </div>
   </nav>
 
-  <!-- ── Hero (About merged in) ── -->
-  <header class="hero">
-    <img class="hero-photo fade" src="assets/img/profile.jpeg" alt="Tanishpreet Singh Sidhu">
-    <div class="hero-eyebrow fade" id="tw-eyebrow" data-text="FinTech & Agentic AI"></div>
-    <h1 class="hero-title fade">Software Engineer with 7 years of enterprise software experience building and managing high-volume FinTech implementations.</h1>
-    <p class="hero-sub fade">I build production ready AI solutions, integrating LLMs with business applications, and I design agentic workflows that solve complex operational problems. Certified in modern AI development, with robust C#, Python and SQL foundation.</p>
-    <div class="fade">
-      <a href="#contact" class="btn-p">Get in touch <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
-    </div>
-  </header>
-
-  <hr class="div">
-
-  <!-- ── Skills & Competencies ── -->
-  <section class="sec" id="skills">
-    <div class="sec-label fade">Skills &amp; Competencies</div>
-    <div class="skill-cats">
-
-      <div class="card cat-card fade">
-        <div class="cat-hd">
-          <div class="cat-ico"><i class="ti ti-code" aria-hidden="true"></i></div>
-          <span class="cat-title">Programming Languages and Databases</span>
-          <span class="cat-count">8</span>
-        </div>
-        <div class="chips-row">
-          <span class="sk">C#</span>
-          <span class="sk"><i class="ti ti-brand-python" aria-hidden="true"></i> Python</span>
-          <span class="sk"><i class="ti ti-database" aria-hidden="true"></i> T-SQL</span>
-          <span class="sk"><i class="ti ti-database" aria-hidden="true"></i> PostgreSQL</span>
-          <span class="sk"><i class="ti ti-layers-linked" aria-hidden="true"></i> Entity Framework</span>
-          <span class="sk"><i class="ti ti-filter" aria-hidden="true"></i> LINQ</span>
-          <span class="sk"><i class="ti ti-brand-html5" aria-hidden="true"></i> HTML</span>
-          <span class="sk"><i class="ti ti-brand-javascript" aria-hidden="true"></i> JavaScript</span>
+  <main id="main">
+    <header class="hero" id="top">
+      <div class="hero-portrait reveal">
+        <img class="hero-image" src="assets/img/journey/journey-portrait.jpg" alt="Portrait of Tanishpreet" loading="eager">
+        <div class="hero-copy">
+          <h1 class="handwritten" data-handwriting="Tanish Sidhu">Tanish Sidhu</h1>
+          <p>I'm an experienced Software Engineer with a passion for building AI-native products, integrating LLMs into existing software, and designing agentic AI workflows that automate complex business operations. From prototype to production, I help clients turn AI into a competitive advantage.</p>
+          <a class="button button-primary" href="#contact">Get in touch <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
         </div>
       </div>
+    </header>
 
-      <div class="card cat-card fade">
-        <div class="cat-hd">
-          <div class="cat-ico"><i class="ti ti-brain" aria-hidden="true"></i></div>
-          <span class="cat-title">AI &amp; Applied Engineering</span>
-          <span class="cat-count">12</span>
-        </div>
-        <div class="chips-row">
-          <span class="sk"><i class="ti ti-cpu" aria-hidden="true"></i> Local LLM Fine-Tuning (Llama 3B)</span>
-          <span class="sk"><i class="ti ti-search" aria-hidden="true"></i> RAG Architectures</span>
-          <span class="sk"><i class="ti ti-route" aria-hidden="true"></i> Agentic Workflows</span>
-          <span class="sk"><i class="ti ti-topology-star" aria-hidden="true"></i> LangGraph</span>
-          <span class="sk"><i class="ti ti-plug" aria-hidden="true"></i> LLM API Integrations (Anthropic · OpenAI · DeepSeek)</span>
-          <span class="sk"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Prompt Engineering</span>
-          <span class="sk"><i class="ti ti-sparkles" aria-hidden="true"></i> Claude Code</span>
-          <span class="sk"><i class="ti ti-pointer" aria-hidden="true"></i> Cursor</span>
-          <span class="sk"><i class="ti ti-robot" aria-hidden="true"></i> Codex</span>
-          <span class="sk"><i class="ti ti-cat" aria-hidden="true"></i> OpenClaw</span>
-          <span class="sk"><i class="ti ti-rocket" aria-hidden="true"></i> Google Antigravity</span>
-          <span class="sk"><i class="ti ti-bolt" aria-hidden="true"></i> Hermes AI</span>
-        </div>
-      </div>
-
-      <div class="card cat-card fade">
-        <div class="cat-hd">
-          <div class="cat-ico"><i class="ti ti-cloud" aria-hidden="true"></i></div>
-          <span class="cat-title">Cloud &amp; DevOps</span>
-          <span class="cat-count">8</span>
-        </div>
-        <div class="chips-row">
-          <span class="sk"><i class="ti ti-brand-azure" aria-hidden="true"></i> Azure</span>
-          <span class="sk"><i class="ti ti-database" aria-hidden="true"></i> Supabase</span>
-          <span class="sk"><i class="ti ti-brand-vercel" aria-hidden="true"></i> Vercel</span>
-          <span class="sk"><i class="ti ti-git-branch" aria-hidden="true"></i> Git</span>
-          <span class="sk"><i class="ti ti-versions" aria-hidden="true"></i> TFS</span>
-          <span class="sk"><i class="ti ti-terminal" aria-hidden="true"></i> Visual Studio</span>
-          <span class="sk"><i class="ti ti-arrows-shuffle" aria-hidden="true"></i> CI/CD</span>
-          <span class="sk"><i class="ti ti-api" aria-hidden="true"></i> Postman</span>
-        </div>
-      </div>
-
-      <div class="card cat-card fade">
-        <div class="cat-hd">
-          <div class="cat-ico"><i class="ti ti-layout-kanban" aria-hidden="true"></i></div>
-          <span class="cat-title">Data Analysis, Visualization, &amp; Collaboration</span>
-          <span class="cat-count">6</span>
-        </div>
-        <div class="chips-row">
-          <span class="sk"><i class="ti ti-brand-trello" aria-hidden="true"></i> JIRA</span>
-          <span class="sk"><i class="ti ti-headset" aria-hidden="true"></i> ServiceNow</span>
-          <span class="sk"><i class="ti ti-books" aria-hidden="true"></i> Confluence</span>
-          <span class="sk"><i class="ti ti-player-play" aria-hidden="true"></i> Power Automate</span>
-          <span class="sk"><i class="ti ti-brand-slack" aria-hidden="true"></i> Slack</span>
-          <span class="sk"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i> Microsoft Office</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="div">
-
-  <!-- ── Experience ── -->
-  <section class="sec" id="experience">
-    <div class="sec-label fade">Experience</div>
-
-    <div class="exp-header fade">
-      <div class="odessa-wrap">
-        <img src="assets/img/logos/odessa.svg" alt="Odessa Technologies logo">
-      </div>
-      <div>
-        <div class="exp-co-name">Odessa</div>
-        <div class="exp-co-meta">FinTech · Asset Finance Product</div>
-      </div>
-    </div>
-
-    <div class="exp-layout">
-      <!-- Career progression timeline -->
-      <div class="fade">
-        <div class="track-label">Career progression</div>
-
-        <div class="role-row">
-          <div class="rdot current"></div>
-          <div>
-            <div class="role-title">Technical Lead</div>
-            <div class="role-date">Apr 2025 – May 2026</div>
-          </div>
-        </div>
-        <div class="role-row">
-          <div class="rdot"></div>
-          <div>
-            <div class="role-title">Staff Engineer</div>
-            <div class="role-date">Apr 2024 – Mar 2025</div>
-          </div>
-        </div>
-        <div class="role-row">
-          <div class="rdot"></div>
-          <div>
-            <div class="role-title">Senior Software Engineer</div>
-            <div class="role-date">Apr 2022 – Mar 2024</div>
-          </div>
-        </div>
-        <div class="role-row">
-          <div class="rdot"></div>
-          <div>
-            <div class="role-title">Software Engineer</div>
-            <div class="role-date">Jun 2020 – Mar 2022</div>
-          </div>
-        </div>
-        <div class="role-row">
-          <div class="rdot"></div>
-          <div>
-            <div class="role-title">Intern</div>
-            <div class="role-dept">Software Engineering</div>
-            <div class="role-date">Jun 2019 – May 2020</div>
+    <section class="client-band" aria-labelledby="clients-title">
+      <p id="clients-title">Enterprise clients I’ve supported</p>
+      <div class="client-logos">
+        <div class="client-track">
+          <div class="client-logo-set" role="list">
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/hpe.svg" alt="HPE"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/ge-capital.svg" alt="GE Capital"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/td-bank.svg" alt="TD Bank"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/canon.svg" alt="Canon Financial"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/haydock-finance.png" alt="Haydock Finance"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/asset-alliance-group.png" alt="Asset Alliance Group"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/volvo.svg" alt="Volvo Financial Services"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/dell-technologies.svg" alt="Dell Technologies"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/laurentian-bank.svg" alt="Laurentian Bank of Canada"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/leaf-capital.png" alt="LEAF Capital"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/mizuho.svg" alt="Mizuho"></div>
+        <div class="client-logo client-logo-dark" role="listitem"><img src="assets/img/logos/pnc.svg" alt="PNC Bank"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/fiserv.svg" alt="Fiserv"></div>
+        <div class="client-logo client-logo-dark client-logo-eplus" role="listitem"><img src="assets/img/logos/eplus-wordmark.svg" alt="ePlus"></div>
+        <div class="client-logo" role="listitem"><img src="assets/img/logos/crestmark.png" alt="Crestmark"></div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Key contributions -->
-      <div class="fade">
-        <div class="ach-label">Key contributions</div>
+    <section class="section projects-section" id="projects">
+      <div class="section-heading reveal">
+        <p class="kicker">Projects and Engagements</p>
+        <h2>Built for real-world problems.</h2>
+      </div>
+      <div class="project-grid">
+        <article class="project-card project-blue reveal">
+          <div class="project-copy"><p class="project-type">AI engineering</p><h3>Payload-Gen</h3><p>Natural language to API payload generator combining RAG for schema retrieval with a locally fine-tuned Llama 3B model. Deterministic evaluation achieved 95% valid JSON on unseen enterprise API specs — a secure, low-latency, on-premise alternative to frontier models.</p><div class="project-meta">Llama 3B · RAG · Fine-Tuning · Python</div><div class="project-links"><a href="https://github.com/tanishsidhu/payloadgen" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
+          <div class="project-visual payload-visual" aria-hidden="true"><div class="mini-window"><div class="window-bar"><i></i><i></i><i></i></div><code>{<br>&nbsp;&nbsp;"intent": "create",<br>&nbsp;&nbsp;"valid": <b>true</b><br>}</code><span class="valid-pill">95% valid JSON</span></div></div>
+        </article>
+        <article class="project-card project-yellow reveal">
+          <div class="project-copy"><p class="project-type">Agentic workflows</p><h3>Support-Agent</h3><p>Autonomous support agent prototype using agentic loop architecture and DeepSeek for enterprise ticket classification. Retrieval pulls resolution evidence from historical documentation, enabling the agent to draft highly accurate, cited responses.</p><div class="project-meta">Agentic Loop · DeepSeek · RAG</div><div class="project-links"><a href="https://github.com/tanishsidhu/supportagent" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
+          <div class="project-visual support-visual" aria-hidden="true"><div class="ticket"><span class="ticket-icon"><i class="ti ti-headset"></i></span><div><small>Support request</small><strong>Draft response ready</strong></div><span class="status-dot"></span></div><div class="answer-card"><i class="ti ti-sparkles"></i><span>Grounded in retrieved evidence</span></div></div>
+        </article>
+        <article class="project-card project-red reveal">
+          <div class="project-copy"><p class="project-type">AI SaaS</p><h3>Pokrit</h3><p>End-to-end AI SaaS that autonomously scrapes job boards and uses language models to match live listings against user résumés. C# .NET 8 Azure Functions and Supabase backend with a Next.js frontend, generating daily digest emails with fit scores and automated cover letters.</p><div class="project-meta">Next.js · .NET 8 · Azure Functions · Supabase · Claude API</div><div class="project-links"><a href="https://pokrit.vercel.app/" target="_blank" rel="noopener">Live <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
+          <div class="project-visual pokrit-visual" aria-hidden="true"><div class="match-card"><div class="match-score">92</div><div><small>Strong match</small><strong>Senior Software Engineer</strong><span>AI-generated fit analysis</span></div></div><div class="match-card rear"></div></div>
+        </article>
+        <article class="project-card project-green reveal">
+          <div class="project-copy"><p class="project-type">Market intelligence</p><h3>PeakOrLow</h3><p>Full stack market briefing web app in C# and ASP.NET Core, integrated with the Anthropic Claude API to process data and generate automated intelligence summaries. Hosted on Azure with a cost-optimised caching architecture.</p><div class="project-meta">C# · ASP.NET · Azure · Claude API</div><div class="project-links"><a href="https://github.com/tanishsidhu/PeakOrLow" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a><a href="https://peakorlow.azurewebsites.net/" target="_blank" rel="noopener">Live <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
+          <div class="project-visual market-visual" aria-hidden="true"><div class="chart-card"><span>Market briefing</span><svg viewBox="0 0 360 150" preserveAspectRatio="none"><path class="chart-fill" d="M0 140 L0 105 L45 112 L90 76 L135 88 L180 48 L225 64 L270 24 L315 42 L360 10 L360 140 Z"></path><path class="chart-line" d="M0 105 L45 112 L90 76 L135 88 L180 48 L225 64 L270 24 L315 42 L360 10"></path></svg></div></div>
+        </article>
+        <article class="project-card project-purple compact reveal">
+          <div class="project-copy"><p class="project-type">Agent skill</p><h3>OpenClaw Skill</h3><p>OpenClaw agent skill that automates job discovery across LinkedIn, Poslovi Infostud, and HelloWorld.rs. Scrapes live listings, scores each role against your résumé using DeepSeek, and delivers a structured digest.</p><div class="project-meta">OpenClaw · Agent Skill · DeepSeek API</div><div class="project-links"><a href="https://clawhub.ai/tanishsidhu/job-search-skill" target="_blank" rel="noopener">ClawHub <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
+          <div class="project-visual openclaw-visual" aria-hidden="true">
+            <div class="source-row"><span>LinkedIn</span><span>Infostud</span><span>HelloWorld</span></div>
+            <div class="agent-flow"><span class="agent-mark"><i class="ti ti-paw"></i></span><i class="ti ti-arrow-right"></i><div><small>Agent run</small><strong>12 roles ranked</strong></div></div>
+            <div class="digest-pill"><i class="ti ti-sparkles"></i> Structured job digest ready</div>
+          </div>
+        </article>
+        <article class="project-card project-gray compact reveal">
+          <div class="project-copy"><p class="project-type">Social platform</p><h3>alias</h3><p>Social-media-inspired platform emphasising free speech and anonymity. Built with Node.js, Express.js, and MongoDB, deployed on Heroku.</p><div class="project-meta">Node.js · Express · MongoDB</div><div class="project-links"><a href="https://github.com/tanishsidhu/alias" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
+          <div class="project-visual alias-visual" aria-hidden="true">
+            <div class="alias-profile"><span><i class="ti ti-mask"></i></span><div><strong>anonymous</strong><small>@hidden_voice</small></div></div>
+            <div class="alias-post">Ideas deserve a voice without needing a name.</div>
+            <div class="alias-actions"><span><i class="ti ti-message-circle"></i> 24</span><span><i class="ti ti-repeat"></i> 81</span><span><i class="ti ti-heart"></i> 316</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-        <div class="card ac banner">
-          <div class="ac-ico"><i class="ti ti-building-bank" aria-hidden="true"></i></div>
-          <div class="ac-title">Enterprise Client Management</div>
-          <div class="ac-body">Technical lead for HPE, GE Capital, TD Bank, Canon Financial, Haydock Finance, Asset Alliance Group, and Volvo Financial Services.</div>
-          <div class="client-row">
-            <span class="client-tile hpe"><img src="assets/img/logos/hpe.svg" alt="HPE logo"></span>
-            <span class="client-tile ge"><img src="assets/img/logos/ge-capital.svg" alt="GE Capital logo"></span>
-            <span class="client-tile td"><img src="assets/img/logos/td-bank.svg" alt="TD Bank logo"></span>
-            <span class="client-tile canon"><img src="assets/img/logos/canon.svg" alt="Canon Financial logo"></span>
-            <span class="client-tile haydock"><img src="assets/img/logos/haydock.png" alt="Haydock Finance logo"></span>
-            <span class="client-tile asset-alliance"><img src="assets/img/logos/asset-alliance.png" alt="Asset Alliance Group logo"></span>
-            <span class="client-tile volvo"><img src="assets/img/logos/volvo.svg" alt="Volvo Financial Services logo"></span>
+    <section class="section experience-section" id="experience">
+      <div class="section-heading reveal">
+        <p class="kicker">Experience</p>
+        <h2>Seven years, one connected journey.</h2>
+      </div>
+
+      <div class="experience-shell reveal">
+        <div class="company-bar">
+          <div class="company-logo"><img src="assets/img/logos/odessa.svg" alt="Odessa Technologies logo"></div>
+          <div><h3>Odessa</h3><p>FinTech · Asset Finance Product</p></div>
+        </div>
+        <div class="career-overview">
+          <div class="career-map">
+            <div class="career-map-head">
+              <div><p class="panel-label">Career progression</p><h3>From first commit to technical leadership</h3></div>
+              <span>2019 - 2026</span>
+            </div>
+            <div class="career-graph" role="img" aria-label="Career progression at Odessa from Intern in 2019 to Technical Lead in 2025">
+              <svg class="career-graph-lines" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+                <path class="graph-link ghost" d="M80 228 C210 128 315 264 440 151 S690 132 920 50"></path>
+                <path class="graph-link" d="M80 228 C185 230 208 194 280 194 S376 170 470 150 S592 110 670 104 S818 76 920 50"></path>
+                <path class="graph-branch" d="M280 194 L208 94 M470 150 L518 246 M670 104 L760 216"></path>
+                <circle cx="208" cy="94" r="5"></circle><circle cx="518" cy="246" r="5"></circle><circle cx="760" cy="216" r="5"></circle>
+              </svg>
+              <article class="career-node node-intern"><span class="node-dot"></span><small>Jun 2019</small><strong>Intern</strong><em>India</em></article>
+              <article class="career-node node-engineer"><span class="node-dot"></span><small>Jun 2020</small><strong>Software Engineer</strong><em>India</em></article>
+              <article class="career-node node-senior"><span class="node-dot"></span><small>Apr 2022</small><strong>Senior Engineer</strong><em>India</em></article>
+              <article class="career-node node-staff"><span class="node-dot"></span><small>Apr 2024</small><strong>Staff Engineer</strong><em>India</em></article>
+              <article class="career-node node-lead"><span class="node-dot"></span><small>Apr 2025</small><strong>Technical Lead</strong><em>Belgrade, Serbia</em></article>
+            </div>
+          </div>
+
+          <div class="career-highlights">
+            <div class="career-highlights-head"><p class="panel-label">What the progression represents</p></div>
+            <div class="highlight-grid">
+              <article class="career-highlight highlight-blue"><strong>15</strong><h4>Enterprise clients supported</h4><p>Complex asset-finance implementations in high-stakes environments.</p></article>
+              <article class="career-highlight highlight-yellow highlight-api"><strong>&lt;API/&gt;</strong><h4>Integrations made dependable</h4><p>Inspected payloads, debugged endpoints, and resolved data-mapping failures.</p></article>
+              <article class="career-highlight highlight-green"><strong>✓</strong><h4>Near-zero-defect delivery</h4><p>Code reviews, unit tests, UAT, and controlled releases kept quality high.</p></article>
+              <article class="career-highlight highlight-red"><strong>Ship</strong><h4>Features owned end to end</h4><p>From implementation and upgrades through performance testing and release.</p></article>
+              <article class="career-highlight highlight-purple"><strong>3</strong><h4>Regions connected</h4><p>Led distributed teams across the U.S., India, and Serbia.</p></article>
+              <article class="career-highlight highlight-blue"><strong>AI</strong><h4>AI moved into practice</h4><p>Championed vendor exploration and daily Claude Code, Cursor, and Codex workflows.</p></article>
+              <article class="career-highlight highlight-yellow"><strong>SQL</strong><h4>Data-intensive systems untangled</h4><p>Owned stored procedures, transaction diagnostics, and financial data integrity.</p></article>
+              <article class="career-highlight highlight-green"><strong>C#</strong><h4>Full-stack product engineering</h4><p>Built across backend, APIs, frontend workflows, Azure releases, and support.</p></article>
+            </div>
           </div>
         </div>
-
-        <div class="card ac banner">
-          <div class="ac-ico"><i class="ti ti-brain" aria-hidden="true"></i></div>
-          <div class="ac-title">AI Engineering &amp; Team Adoption</div>
-          <div class="ac-body">Drove adoption of AI developer tools across the engineering team — integrating Claude Code, Cursor, and Codex into daily workflows to accelerate code generation, assist in deep debugging, and establish practical standards for AI-assisted development. Championed internal AI initiatives exploring vendor integrations with ABBYY and ZEST to build intelligent client features, including AI-assisted contract summaries.</div>
-        </div>
-
-        <div class="ach-grid">
-
-          <div class="card ac">
-            <div class="ac-ico"><i class="ti ti-users" aria-hidden="true"></i></div>
-            <div class="ac-title">Global Team Leadership</div>
-            <div class="ac-body">Spearheaded distributed teams across India, Serbia &amp; the U.S. for delivery planning, project implementation, and stakeholder alignment.</div>
+        <div class="experience-gallery" id="journey-gallery">
+          <div class="experience-gallery-head">
+            <span class="journey-icon"><i class="ti ti-camera" aria-hidden="true"></i></span>
+            <div><p class="panel-label">Along the way</p><h3>The people behind the journey</h3></div>
           </div>
-
-          <div class="card ac">
-            <div class="ac-ico"><i class="ti ti-database" aria-hidden="true"></i><span class="ac-stat">70%</span></div>
-            <div class="ac-title">SQL Performance Optimisation</div>
-            <div class="ac-body">Refactored stored procedures using SQL Profiler and execution plans, improving system performance by up to 70%.</div>
+          <div class="experience-gallery-grid">
+            <figure class="gallery-lunch" tabindex="0"><img src="assets/img/journey/journey-team-lunch.jpg" alt="Tanishpreet and colleagues gathered around a restaurant table" loading="lazy"></figure>
+            <figure class="gallery-india" tabindex="0"><img src="assets/img/journey/journey-india-team.jpg" alt="Tanishpreet with colleagues during a team outing in India" loading="lazy"></figure>
+            <figure class="gallery-holi" tabindex="0"><img src="assets/img/journey/journey-holi.jpg" alt="Tanishpreet and colleagues celebrating Holi at the office" loading="lazy"></figure>
+            <figure class="gallery-coats" tabindex="0"><img src="assets/img/journey/journey-office-coats.jpg" alt="Tanishpreet with a colleague during a winter office day" loading="lazy"></figure>
+            <figure class="gallery-cake" tabindex="0"><img src="assets/img/journey/journey-cake.jpg" alt="Tanishpreet and colleagues celebrating together at the office" loading="lazy"></figure>
+            <figure class="gallery-selfie" tabindex="0"><img src="assets/img/journey/journey-selfie.jpg" alt="Tanishpreet smiling with a colleague" loading="lazy"></figure>
+            <figure class="gallery-team" tabindex="0"><img src="assets/img/journey/journey-team.jpg" alt="Tanishpreet with colleagues at a team gathering" loading="lazy"></figure>
+            <figure class="gallery-office" tabindex="0"><img src="assets/img/journey/journey-office.jpg" alt="Tanishpreet with colleagues in the office" loading="lazy"></figure>
+            <figure class="gallery-holiday" tabindex="0"><img src="assets/img/journey/journey-holiday.jpg" alt="Tanishpreet with colleagues at a holiday gathering" loading="lazy"></figure>
+            <figure class="gallery-evening-team" tabindex="0"><img src="assets/img/journey/journey-evening-team.jpg" alt="Tanishpreet with colleagues at an evening gathering" loading="lazy"></figure>
+            <figure class="gallery-dinner-home" tabindex="0"><img src="assets/img/journey/journey-dinner-home.jpg" alt="Tanishpreet and colleagues gathered for dinner" loading="lazy"></figure>
+            <figure class="gallery-restaurant" tabindex="0"><img src="assets/img/journey/journey-restaurant.jpg" alt="Tanishpreet and colleagues sharing a restaurant meal" loading="lazy"></figure>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="card ac">
-            <div class="ac-ico"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
-            <div class="ac-title">Quality Engineering</div>
-            <div class="ac-body">Enforced unit testing, peer code reviews, and reusability standards — achieving near-zero defects in delivered features.</div>
+    <section class="section education-section" id="education">
+      <div class="section-heading reveal">
+        <p class="kicker">Education</p>
+        <h2>Foundations and fluency.</h2>
+      </div>
+      <div class="education-layout">
+        <div class="education-grid">
+          <article class="education-card education-card-university reveal">
+            <div class="education-top">
+              <img class="education-logo education-logo-chitkara" src="assets/img/logos/chitkara-university.png" alt="Chitkara University logo">
+              <span class="year">2016 – 2020</span>
+            </div>
+            <div class="education-copy">
+              <p class="education-level">Bachelor of Technology</p>
+              <h3>Chitkara University</h3>
+              <p>Computer Science</p>
+            </div>
+            <div class="cgpa-highlight" aria-label="CGPA 9.17 out of 10">
+              <div class="cgpa-score"><span>CGPA</span><strong>9.17</strong><small>/ 10</small></div>
+              <div class="cgpa-track" aria-hidden="true"><span style="--score: 91.7%"></span></div>
+            </div>
+            <div class="education-location"><i class="ti ti-map-pin" aria-hidden="true"></i> Rajpura, Punjab, India</div>
+          </article>
+          <article class="education-card education-card-school reveal">
+            <div class="education-top">
+              <div class="school-marks">
+                <img class="education-logo education-logo-gjgs" src="assets/img/logos/gian-jyoti-global-school.png" alt="Gian Jyoti Global School logo">
+                <img class="education-logo education-logo-british-school" src="assets/img/logos/the-british-school.png" alt="The British School logo">
+              </div>
+              <span class="year">2014 – 2016</span>
+            </div>
+            <div class="education-copy">
+              <p class="education-level">High School</p>
+              <h3>Gian Jyoti Global School, The British School</h3>
+              <p>10th – 12th Standard</p>
+            </div>
+            <div class="cgpa-highlight" aria-label="CGPA 10 out of 10">
+              <div class="cgpa-score"><span>CGPA</span><strong>10.00</strong><small>/ 10</small></div>
+              <div class="cgpa-track" aria-hidden="true"><span style="--score: 100%"></span></div>
+            </div>
+            <div class="education-location"><i class="ti ti-map-pin" aria-hidden="true"></i> Chandigarh, India</div>
+          </article>
+        </div>
+        <div class="languages reveal" id="languages">
+          <p class="panel-label">Languages</p>
+          <div class="language-list">
+            <div><span>🇬🇧</span><strong>English</strong><small>Full professional</small></div>
+            <div><span>🇮🇳</span><strong lang="hi">हिन्दी</strong><small>Native</small></div>
+            <div><span>🇮🇳</span><strong lang="pa">ਪੰਜਾਬੀ</strong><small>Native</small></div>
+            <div><span>🇷🇸</span><strong lang="sr">Српски</strong><small>Beginner</small></div>
           </div>
-
-          <div class="card ac">
-            <div class="ac-ico"><i class="ti ti-cloud" aria-hidden="true"></i></div>
-            <div class="ac-title">Azure DevOps &amp; CI/CD</div>
-            <div class="ac-body">Maintained CI/CD pipelines, managed cross-environment deployments, and executed controlled releases with rollback readiness.</div>
-          </div>
-
-          <div class="card ac">
-            <div class="ac-ico"><i class="ti ti-api" aria-hidden="true"></i></div>
-            <div class="ac-title">API Integration Support</div>
-            <div class="ac-body">Diagnosed API defects via Postman and supported client teams integrating Odessa APIs into business workflows.</div>
-          </div>
-
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <hr class="div">
-
-  <!-- ── Projects and Engagements ── -->
-  <section class="sec" id="projects">
-    <div class="sec-label fade">Projects and Engagements</div>
-    <div class="proj-grid">
-
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-code-asterix" aria-hidden="true"></i></div>
-        <div class="proj-name">Payload-Gen</div>
-        <div class="proj-desc">Natural language to API payload generator combining RAG for schema retrieval with a locally fine-tuned Llama 3B model. Deterministic evaluation achieved 95% valid JSON on unseen enterprise API specs — a secure, low-latency, on-premise alternative to frontier models.</div>
-        <div class="proj-tags">Llama 3B · RAG · Fine-Tuning · Python</div>
-        <div class="plinks">
-          <a href="https://github.com/tanishsidhu/payloadgen" class="plink" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> Code</a>
+    <section class="contact-section" id="contact">
+      <div class="contact-inner reveal">
+        <div class="availability"><span></span> Valid Serbian Work Permit</div>
+        <h2>Let's work together!</h2>
+        <div class="contact-links" aria-label="Contact links">
+          <a class="social-button social-gmail" href="mailto:tanishpreet.official@gmail.com" aria-label="Email Tanishpreet"><i class="ti ti-brand-gmail" aria-hidden="true"></i></a>
+          <a class="social-button social-linkedin" href="https://linkedin.com/in/tanishsidhu" target="_blank" rel="noopener" aria-label="Tanishpreet on LinkedIn"><i class="ti ti-brand-linkedin" aria-hidden="true"></i></a>
+          <a class="social-button social-github" href="https://github.com/tanishsidhu" target="_blank" rel="noopener" aria-label="Tanishpreet on GitHub"><i class="ti ti-brand-github" aria-hidden="true"></i></a>
         </div>
       </div>
+    </section>
+  </main>
 
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-headset" aria-hidden="true"></i></div>
-        <div class="proj-name">Support-Agent</div>
-        <div class="proj-desc">Autonomous support agent prototype using agentic loop architecture and DeepSeek for enterprise ticket classification. Retrieval pulls resolution evidence from historical documentation, enabling the agent to draft highly accurate, cited responses.</div>
-        <div class="proj-tags">Agentic Loop · DeepSeek · RAG</div>
-        <div class="plinks">
-          <a href="https://github.com/tanishsidhu/supportagent" class="plink" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> Code</a>
-        </div>
-      </div>
-
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-target" aria-hidden="true"></i></div>
-        <div class="proj-name">Pokrit</div>
-        <div class="proj-desc">End-to-end AI SaaS that autonomously scrapes job boards and uses language models to match live listings against user résumés. C# .NET 8 Azure Functions and Supabase backend with a Next.js frontend, generating daily digest emails with fit scores and automated cover letters.</div>
-        <div class="proj-tags">Next.js · .NET 8 · Azure Functions · Supabase · Claude API</div>
-        <div class="plinks">
-          <a href="https://pokrit.vercel.app/" class="plink" target="_blank" rel="noopener"><i class="ti ti-external-link" aria-hidden="true"></i> Live</a>
-        </div>
-      </div>
-
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
-        <div class="proj-name">PeakOrLow</div>
-        <div class="proj-desc">Full stack market briefing web app in C# and ASP.NET Core, integrated with the Anthropic Claude API to process data and generate automated intelligence summaries. Hosted on Azure with a cost-optimised caching architecture.</div>
-        <div class="proj-tags">C# · ASP.NET · Azure · Claude API</div>
-        <div class="plinks">
-          <a href="https://github.com/tanishsidhu/PeakOrLow" class="plink" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> Code</a>
-          <a href="https://peakorlow.azurewebsites.net/" class="plink" target="_blank" rel="noopener"><i class="ti ti-external-link" aria-hidden="true"></i> Live</a>
-        </div>
-      </div>
-
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
-        <div class="proj-name">OpenClaw Skill</div>
-        <div class="proj-desc">OpenClaw agent skill that automates job discovery across LinkedIn, Poslovi Infostud, and HelloWorld.rs. Scrapes live listings, scores each role against your résumé using DeepSeek, and delivers a structured digest.</div>
-        <div class="proj-tags">OpenClaw · Agent Skill · DeepSeek API</div>
-        <div class="plinks">
-          <a href="https://clawhub.ai/tanishsidhu/job-search-skill" class="plink" target="_blank" rel="noopener"><i class="ti ti-external-link" aria-hidden="true"></i> ClawHub</a>
-        </div>
-      </div>
-
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-shield" aria-hidden="true"></i></div>
-        <div class="proj-name">alias</div>
-        <div class="proj-desc">Social-media-inspired platform emphasising free speech and anonymity. Built with Node.js, Express.js, and MongoDB, deployed on Heroku.</div>
-        <div class="proj-tags">Node.js · Express · MongoDB</div>
-        <div class="plinks">
-          <a href="https://github.com/tanishsidhu/alias" class="plink" target="_blank" rel="noopener"><i class="ti ti-brand-github" aria-hidden="true"></i> Code</a>
-        </div>
-      </div>
-
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-world" aria-hidden="true"></i></div>
-        <div class="proj-name">Odessa Launchpad</div>
-        <div class="proj-desc">Product Innovation Program: market strategy for Islamic Banking entry in the Middle East, including a localised prototype of the Odessa application.</div>
-        <div class="proj-tags">Product · Market Strategy</div>
-      </div>
-
-      <div class="card proj-card fade">
-        <div class="proj-ico"><i class="ti ti-rocket" aria-hidden="true"></i></div>
-        <div class="proj-name">Chitkara Incubator</div>
-        <div class="proj-desc">E-commerce platform for bulk goods delivery. Pitched to angel investors; collaborated with market researchers and a developer team to evaluate business feasibility.</div>
-        <div class="proj-tags">Entrepreneurship · B2B</div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="div">
-
-  <!-- ── Awards & Certifications ── -->
-  <section class="sec" id="awards">
-    <div class="sec-label fade">Awards &amp; Certifications</div>
-    <div class="certs-list">
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/anthropic.svg" alt="Anthropic logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">Building with the Claude API</div>
-          <div class="cert-issuer">Anthropic</div>
-        </div>
-      </div>
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/anthropic.svg" alt="Anthropic logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">Claude Code in Action</div>
-          <div class="cert-issuer">Anthropic</div>
-        </div>
-      </div>
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/openedg.svg" alt="OpenEDG logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">Python Professional</div>
-          <div class="cert-issuer">OpenEDG Python Institute &amp; LinkedIn Learning</div>
-        </div>
-      </div>
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/langchain.svg" alt="LangChain logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">LangGraph Essentials</div>
-          <div class="cert-issuer">LangChain Academy</div>
-        </div>
-      </div>
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/google.svg" alt="Google logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">Foundations of Project Management</div>
-          <div class="cert-issuer">Google · Coursera</div>
-        </div>
-      </div>
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/hackerrank.svg" alt="HackerRank logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">SQL Skill Certification</div>
-          <div class="cert-issuer">HackerRank</div>
-        </div>
-      </div>
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/linkedin.svg" alt="LinkedIn logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">Foundations of Artificial Intelligence</div>
-          <div class="cert-issuer">LinkedIn Learning</div>
-        </div>
-      </div>
-
-      <div class="card cert fade">
-        <div class="cert-logo"><img src="assets/img/logos/coding-ninjas.svg" alt="Coding Ninjas logo"></div>
-        <div class="cert-info">
-          <div class="cert-name">Data Structures &amp; Java</div>
-          <div class="cert-issuer">Coding Ninjas</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="div">
-
-  <!-- ── Education ── -->
-  <section class="sec" id="education">
-    <div class="sec-label fade">Education</div>
-    <div class="edu-grid">
-
-      <div class="card edu-card fade">
-        <div class="edu-ico"><i class="ti ti-school" aria-hidden="true"></i></div>
-        <div class="edu-school-name">Chitkara University</div>
-        <span class="edu-ytag">2016 – 2020</span>
-        <div class="edu-deg">Bachelor of Technology / Computer Science</div>
-        <div class="edu-foot">
-          <div class="cgpa-row">
-            <span class="cgpa-lbl">CGPA</span>
-            <span class="cgpa-val">9.17 / 10</span>
-          </div>
-          <div class="edu-loc"><i class="ti ti-map-pin" aria-hidden="true"></i> Rajpura, Punjab, India</div>
-        </div>
-      </div>
-
-      <div class="card edu-card fade">
-        <div class="edu-ico"><i class="ti ti-book" aria-hidden="true"></i></div>
-        <div class="edu-school-name">Gian Jyoti Global School, The British School</div>
-        <span class="edu-ytag">2014 – 2016</span>
-        <div class="edu-deg">High School / 10th – 12th Standard</div>
-        <div class="edu-foot">
-          <div class="cgpa-row">
-            <span class="cgpa-lbl">CGPA</span>
-            <span class="cgpa-val">10.00 / 10</span>
-          </div>
-          <div class="edu-loc"><i class="ti ti-map-pin" aria-hidden="true"></i> Chandigarh, India</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="div">
-
-  <!-- ── Languages ── -->
-  <section class="sec" id="languages">
-    <div class="sec-label fade">Languages</div>
-    <div class="langs-grid">
-      <div class="card lang-card fade">
-        <span class="lang-flag">🇬🇧</span>
-        <div class="lang-name tw-lang" data-text="English" lang="en"></div>
-        <div class="lang-lvl">Full professional</div>
-      </div>
-      <div class="card lang-card fade">
-        <span class="lang-flag">🇮🇳</span>
-        <div class="lang-name tw-lang" data-text="हिन्दी" lang="hi"></div>
-        <div class="lang-lvl">Native</div>
-      </div>
-      <div class="card lang-card fade">
-        <span class="lang-flag">🇮🇳</span>
-        <div class="lang-name tw-lang" data-text="ਪੰਜਾਬੀ" lang="pa"></div>
-        <div class="lang-lvl">Native</div>
-      </div>
-      <div class="card lang-card fade">
-        <span class="lang-flag">🇷🇸</span>
-        <div class="lang-name tw-lang" data-text="Српски" lang="sr"></div>
-        <div class="lang-lvl">Beginner</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="div">
-
-  <!-- ── Contact ── -->
-  <section class="sec" id="contact">
-    <div class="contact-block fade">
-      <div class="contact-title">Let's work together!</div>
-      <div class="contact-tags">
-        <span class="ctag green"><span class="cdot green-dot"></span>Valid Serbian Work Permit</span>
-      </div>
-      <div class="c-links">
-        <a href="mailto:tanishpreet.official@gmail.com" class="c-link">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" fill="#EA4335"/>
-          </svg>
-          Gmail
-        </a>
-        <a href="https://linkedin.com/in/tanishsidhu" class="c-link" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0077B5"/>
-          </svg>
-          LinkedIn
-        </a>
-        <a href="https://github.com/tanishsidhu" class="c-link" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#f5f5f0"/>
-          </svg>
-          GitHub
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <span class="footer-l">&copy; 2026 Tanishpreet Singh Sidhu</span>
+  <footer class="site-footer">
+    <span>&copy; 2026 Tanishpreet Singh Sidhu</span>
+    <a href="#top">Back to top <i class="ti ti-arrow-up" aria-hidden="true"></i></a>
   </footer>
 
-  <script>
-    (function () {
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var hasIO = 'IntersectionObserver' in window;
-
-      function typeWriter(el, text, speed, onDone, showCursor) {
-        if (showCursor === undefined) showCursor = true;
-        el.textContent = '';
-        var cursor = null;
-        if (showCursor) {
-          cursor = document.createElement('span');
-          cursor.className = 'tw-cursor';
-          cursor.setAttribute('aria-hidden', 'true');
-          el.appendChild(cursor);
-        }
-        var i = 0;
-        (function step() {
-          if (i < text.length) {
-            if (cursor) {
-              cursor.insertAdjacentText('beforebegin', text.charAt(i));
-            } else {
-              el.textContent += text.charAt(i);
-            }
-            i++;
-            setTimeout(step, speed);
-          } else {
-            if (cursor) cursor.classList.add('done');
-            if (onDone) onDone();
-          }
-        })();
-      }
-
-      // ── Hero eyebrow types on load ──
-      var eyebrow = document.getElementById('tw-eyebrow');
-      if (eyebrow) {
-        var eyebrowText = eyebrow.getAttribute('data-text');
-        if (reduce) { eyebrow.textContent = eyebrowText; }
-        else { typeWriter(eyebrow, eyebrowText, 55, null, false); }
-      }
-
-      // ── Scroll fade-in + language typewriter ──
-      var langEls = document.querySelectorAll('.tw-lang');
-      function fillLang(el) { el.textContent = el.getAttribute('data-text'); }
-
-      if (!hasIO) {
-        document.querySelectorAll('.fade').forEach(function (el) { el.classList.add('in'); });
-        langEls.forEach(fillLang);
-        return;
-      }
-
-      var fadeObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            fadeObs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.fade').forEach(function (el) { fadeObs.observe(el); });
-
-      var langObs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var el = entry.target;
-            langObs.unobserve(el);
-            if (reduce) { fillLang(el); }
-            else { typeWriter(el, el.getAttribute('data-text'), 160, null, false); }
-          }
-        });
-      }, { threshold: 0.6 });
-      langEls.forEach(function (el) { langObs.observe(el); });
-    })();
-  </script>
-  <script src="assets/js/mode-toggle.js"></script>
+  <script src="assets/js/site.js?v=20260805v"></script>
 </body>
 </html>
