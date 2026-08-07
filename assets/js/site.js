@@ -1,11 +1,13 @@
 (function () {
   var themeButton = document.querySelector('.theme-toggle');
+  var themeColor = document.querySelector('meta[name="theme-color"]');
   var handwriting = document.querySelector('[data-handwriting]');
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setTheme(theme) {
     var isDark = theme === 'dark';
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    if (themeColor) themeColor.setAttribute('content', isDark ? '#212121' : '#faf9f5');
     if (!themeButton) return;
     themeButton.querySelector('span').textContent = isDark ? '☀️' : '🌙';
     themeButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');

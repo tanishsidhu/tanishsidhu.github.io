@@ -1,4 +1,5 @@
 :root {
+  color-scheme: light;
   --ink: #222222;
   --paper: #faf9f5;
   --soft: #f2f0e9;
@@ -41,7 +42,7 @@ html[data-theme="dark"] {
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; background-color: var(--paper); }
 body {
   margin: 0;
   background: var(--paper);
