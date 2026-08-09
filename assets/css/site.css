@@ -367,11 +367,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .experience-dialog-body > .career-map { min-height: 360px; border-radius: 18px; }
 .experience-dialog-body > .career-highlights { border-radius: 18px; }
 .experience-dialog-body > .experience-gallery { padding: 0; border: 0; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head { display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: center; gap: 16px; padding: 0 0 24px; }
+.experience-dialog-body > .experience-gallery .experience-gallery-head { display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: start; gap: 16px; padding: 0 0 24px; }
 .experience-dialog-body > .experience-gallery .experience-gallery-head > div { min-width: 0; }
+.experience-dialog-body > .experience-gallery .experience-gallery-head > div { padding-top: 2px; }
 .experience-dialog-body > .experience-gallery .experience-gallery-head .journey-icon { width: 56px; height: 56px; }
 .experience-dialog-body > .experience-gallery .experience-gallery-head .panel-label { margin: 0 0 6px; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head h3 { max-width: 680px; margin: 0; font-size: clamp(25px, 3vw, 38px); line-height: 1.02; letter-spacing: -.045em; text-wrap: balance; }
+.experience-dialog-body > .experience-gallery .experience-gallery-head h3 { display: grid; gap: 0; max-width: 680px; margin: 0; font-size: clamp(25px, 3vw, 38px); line-height: 1.02; letter-spacing: -.045em; }
+.experience-dialog-body > .experience-gallery .experience-gallery-head h3 span { display: block; }
 .experience-dialog-body > .experience-gallery .experience-gallery-grid { height: 650px; }
 
 .projects-section { max-width: none; background: var(--soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
