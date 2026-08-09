@@ -246,7 +246,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .experience-card-progression .career-map { height: 100%; border: 0; border-radius: 0; box-shadow: none; }
 .experience-card-highlights .career-highlights { height: 100%; overflow: hidden; border: 0; border-radius: 0; }
 .experience-card-journey .experience-gallery { height: 100%; padding: 0; border: 0; }
-.experience-card-journey .experience-gallery-head { padding: 20px 20px 0; }
 .experience-card-journey .experience-gallery-grid { border: 0; border-radius: 0; }
 .career-map { padding: 18px; overflow: hidden; color: white; background: #17171d; border: 1px solid #292933; border-radius: 18px; box-shadow: 0 14px 32px rgba(13,13,18,.12); }
 .career-map-head { position: relative; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
@@ -305,7 +304,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .role em { margin-top: 2px; color: #3e3e3a; }
 .journey-contributions { min-height: 570px; padding: clamp(28px, 4vw, 52px); background: linear-gradient(145deg, #f5f8fc, #eef5ff); }
 .journey-contributions-head { display: flex; align-items: center; gap: 15px; }
-.journey-icon { width: 48px; height: 48px; display: grid; place-items: center; flex: 0 0 auto; color: var(--blue); background: white; border: 1px solid #d9e6f4; border-radius: 14px; font-size: 23px; box-shadow: 0 5px 18px rgba(35,131,226,.1); }
 .journey-contributions-head .panel-label { margin: 0 0 2px; }
 .journey-contributions h3 { margin: 0; font-size: 25px; letter-spacing: -.035em; }
 .journey-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 28px 0 25px; }
@@ -318,9 +316,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .journey-points i { width: 32px; height: 32px; display: grid; place-items: center; color: var(--blue); background: var(--blue-soft); border-radius: 9px; font-size: 16px; }
 .journey-points li:last-child { grid-column: 1 / -1; }
 .experience-gallery { padding: clamp(24px, 3vw, 40px); background: white; border-top: 1px solid var(--line); }
-.experience-gallery-head { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
-.experience-gallery-head .panel-label { margin: 0 0 2px; }
-.experience-gallery-head h3 { margin: 0; font-size: 24px; letter-spacing: -.035em; }
 .experience-gallery-grid { position: relative; height: 650px; overflow: hidden; background: linear-gradient(145deg, #f8f8f6, #eeeeeb); border: 1px solid var(--line); border-radius: 22px; }
 .experience-gallery figure { position: absolute; min-width: 0; margin: 0; overflow: hidden; background: white; border: 8px solid white; border-radius: 10px; box-shadow: var(--shadow); cursor: zoom-in; outline: none; transition: inset .3s ease, left .3s ease, top .3s ease, width .3s ease, height .3s ease, transform .3s ease, box-shadow .3s ease; }
 .experience-gallery figure:focus-visible { box-shadow: 0 0 0 4px var(--blue-soft), 0 0 0 6px var(--blue); }
@@ -367,13 +362,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .experience-dialog-body > .career-map { min-height: 360px; border-radius: 18px; }
 .experience-dialog-body > .career-highlights { border-radius: 18px; }
 .experience-dialog-body > .experience-gallery { padding: 0; border: 0; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head { display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: start; gap: 16px; padding: 0 0 24px; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head > div { min-width: 0; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head > div { padding-top: 2px; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head .journey-icon { width: 56px; height: 56px; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head .panel-label { margin: 0 0 6px; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head h3 { display: grid; gap: 0; max-width: 680px; margin: 0; font-size: clamp(25px, 3vw, 38px); line-height: 1.02; letter-spacing: -.045em; }
-.experience-dialog-body > .experience-gallery .experience-gallery-head h3 span { display: block; }
 .experience-dialog-body > .experience-gallery .experience-gallery-grid { height: 650px; }
 
 .projects-section { max-width: none; background: var(--soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -541,8 +529,7 @@ html[data-theme="dark"] .experience-gallery,
 html[data-theme="dark"] .education-card,
 html[data-theme="dark"] .social-button,
 html[data-theme="dark"] .button-secondary { background: #292929; }
-html[data-theme="dark"] .company-logo,
-html[data-theme="dark"] .journey-icon { background: #303030; border-color: var(--line); }
+html[data-theme="dark"] .company-logo { background: #303030; border-color: var(--line); }
 html[data-theme="dark"] .career-highlights { background: #292929; }
 html[data-theme="dark"] .career-highlight p,
 html[data-theme="dark"] .project-description,
@@ -665,9 +652,6 @@ html[data-theme="dark"] .nav-links { background: rgba(33,33,33,.98); }
   .experience-dialog { width: calc(100% - 24px); max-height: calc(100dvh - 24px); border-radius: 20px; }
   .experience-dialog-header { padding: 24px 22px 18px; }
   .experience-dialog-body { padding: 0 22px 24px; }
-  .experience-dialog-body > .experience-gallery .experience-gallery-head { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding-bottom: 18px; }
-  .experience-dialog-body > .experience-gallery .experience-gallery-head .journey-icon { width: 44px; height: 44px; border-radius: 12px; font-size: 19px; }
-  .experience-dialog-body > .experience-gallery .experience-gallery-head h3 { font-size: 24px; line-height: 1.05; }
   .experience-dialog-body > .experience-gallery .experience-gallery-grid { height: 690px; }
   .career-map { padding: 18px 14px; border-radius: 16px; }
   .career-map-head { align-items: flex-start; }
