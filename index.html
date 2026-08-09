@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+Devanagari:wght@600&amp;family=Noto+Sans+Gurmukhi:wght@600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link rel="stylesheet" href="assets/css/site.css?v=20260809k">
+  <link rel="stylesheet" href="assets/css/site.css?v=20260809l">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -194,18 +194,27 @@
 
           <article class="experience-card experience-card-highlights" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="experience-dialog" aria-label="View details for What the progression represents" data-experience-title="What the progression represents" data-experience-summary="The enterprise delivery, technical ownership, and applied AI work behind the career progression.">
             <div class="experience-card-visual experience-preview-highlights" aria-hidden="true">
-              <div class="preview-mark preview-mark-system">
-                <span class="tech-orbit tech-orbit-one"></span>
-                <span class="tech-orbit tech-orbit-two"></span>
-                <span class="tech-connector tech-connector-one"></span>
-                <span class="tech-connector tech-connector-two"></span>
-                <span class="tech-connector tech-connector-three"></span>
-                <span class="tech-connector tech-connector-four"></span>
-                <span class="tech-badge tech-badge-csharp"><b>C#</b></span>
-                <span class="tech-badge tech-badge-api"><b>API</b></span>
-                <span class="tech-badge tech-badge-sql"><b>SQL</b></span>
-                <span class="tech-badge tech-badge-vs"><b>VS</b></span>
-                <span class="tech-core"><i class="ti ti-code"></i></span>
+              <div class="preview-mark preview-mark-code">
+                <span class="code-window">
+                  <span class="code-window-bar">
+                    <span class="code-window-dot code-window-dot-red"></span>
+                    <span class="code-window-dot code-window-dot-yellow"></span>
+                    <span class="code-window-dot code-window-dot-green"></span>
+                    <span class="code-window-tab"><i class="ti ti-file-code"></i> FinancingService.cs</span>
+                  </span>
+                  <span class="code-window-body">
+                    <span class="code-line"><b>01</b><span><em class="code-keyword">async</em> <em class="code-type">Task</em>&lt;<em class="code-type">Lease</em>&gt; <em class="code-method">FundAsync</em>(<em class="code-type">Request</em> request)</span></span>
+                    <span class="code-line"><b>02</b><span>{</span></span>
+                    <span class="code-line code-line-highlight"><b>03</b><span><em class="code-keyword">var</em> result = <em class="code-keyword">await</em> gateway.<em class="code-method">ApproveAsync</em>(request);</span></span>
+                    <span class="code-line"><b>04</b><span><em class="code-keyword">await</em> ledger.<em class="code-method">CommitAsync</em>(result);</span></span>
+                    <span class="code-line"><b>05</b><span><em class="code-keyword">return</em> result;</span></span>
+                    <span class="code-line"><b>06</b><span>}</span></span>
+                    <span class="code-cursor"></span>
+                  </span>
+                  <span class="code-window-status"><i class="ti ti-circle-check"></i> build passing <span>main</span></span>
+                </span>
+                <span class="code-terminal"><i class="ti ti-terminal-2"></i><b>$</b> dotnet test <i class="ti ti-check"></i></span>
+                <span class="code-spark"><i class="ti ti-sparkles"></i></span>
               </div>
             </div>
             <div class="experience-card-source" hidden>
