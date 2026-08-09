@@ -17,35 +17,21 @@
   <meta name="twitter:title" content="Tanishpreet Singh Sidhu | Portfolio">
   <meta name="twitter:description" content="Software Engineer with 7 years of FinTech experience building production-ready AI solutions, LLM integrations, and agentic workflows.">
   <meta name="twitter:image" content="https://tanishsidhu.github.io/assets/img/profile.jpeg">
-  <script>document.documentElement.classList.add('js');</script>
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    }());
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+Devanagari:wght@600&amp;family=Noto+Sans+Gurmukhi:wght@600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link rel="stylesheet" href="assets/css/site.css?v=20260809o">
+  <link rel="stylesheet" href="assets/css/site.css?v=20260809p">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <nav class="site-nav" aria-label="Main navigation">
-    <div class="nav-start">
-      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><span aria-hidden="true">🌙</span></button>
-      <span class="flash-label" aria-hidden="true">Theme</span>
-    </div>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
-      <span class="sr-only">Toggle navigation</span>
-      <i class="ti ti-menu-2" aria-hidden="true"></i>
-    </button>
-    <div class="nav-links" id="nav-links">
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-    </div>
-    <div class="nav-actions">
-      <span class="flash-label" aria-hidden="true">Résumé</span>
-      <a class="nav-resume" href="assets/docs/Tanish_Resume.pdf" download title="Download résumé (PDF)" aria-label="Download résumé (PDF)"><i class="ti ti-download" aria-hidden="true"></i></a>
-    </div>
-  </nav>
 
   <main id="main">
     <header class="hero" id="top">
@@ -60,6 +46,7 @@
               <a class="social-button social-linkedin" href="https://linkedin.com/in/tanishsidhu" target="_blank" rel="noopener" aria-label="Tanishpreet on LinkedIn"><i class="ti ti-brand-linkedin" aria-hidden="true"></i></a>
               <a class="social-button social-github" href="https://github.com/tanishsidhu" target="_blank" rel="noopener" aria-label="Tanishpreet on GitHub"><i class="ti ti-brand-github" aria-hidden="true"></i></a>
             </div>
+            <a class="button button-primary hero-resume" href="assets/docs/Tanish_Resume.pdf" download title="Download résumé (PDF)"><i class="ti ti-download" aria-hidden="true"></i> Download résumé</a>
             <div class="availability"><span></span> Valid Serbian Work Permit</div>
           </div>
         </div>
@@ -349,6 +336,6 @@
     <a href="#top">Back to top <i class="ti ti-arrow-up" aria-hidden="true"></i></a>
   </footer>
 
-  <script src="assets/js/site.js?v=20260809d"></script>
+  <script src="assets/js/site.js?v=20260809f"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 (function () {
-  var themeButton = document.querySelector('.theme-toggle');
   var themeColor = document.querySelector('meta[name="theme-color"]');
+  var systemTheme = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
   var handwriting = document.querySelector('[data-handwriting]');
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -8,18 +8,18 @@
     var isDark = theme === 'dark';
     document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
     if (themeColor) themeColor.setAttribute('content', isDark ? '#212121' : '#faf9f5');
-    if (!themeButton) return;
-    themeButton.querySelector('span').textContent = isDark ? '☀️' : '🌙';
-    themeButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    themeButton.setAttribute('aria-pressed', String(isDark));
-    themeButton.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
   }
 
-  setTheme('light');
-  if (themeButton) {
-    themeButton.addEventListener('click', function () {
-      setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-    });
+  setTheme(systemTheme && systemTheme.matches ? 'dark' : 'light');
+  if (systemTheme) {
+    var syncSystemTheme = function (event) {
+      setTheme(event.matches ? 'dark' : 'light');
+    };
+    if (systemTheme.addEventListener) {
+      systemTheme.addEventListener('change', syncSystemTheme);
+    } else if (systemTheme.addListener) {
+      systemTheme.addListener(syncSystemTheme);
+    }
   }
 
   function startHandwriting() {
@@ -80,24 +80,6 @@
     document.fonts.ready.then(startHandwriting);
   } else {
     startHandwriting();
-  }
-
-  var menuButton = document.querySelector('.menu-toggle');
-  var navigation = document.querySelector('.nav-links');
-
-  if (menuButton && navigation) {
-    menuButton.addEventListener('click', function () {
-      var isOpen = navigation.classList.toggle('open');
-      menuButton.setAttribute('aria-expanded', String(isOpen));
-      menuButton.querySelector('i').className = isOpen ? 'ti ti-x' : 'ti ti-menu-2';
-    });
-
-    navigation.addEventListener('click', function (event) {
-      if (!event.target.closest('a')) return;
-      navigation.classList.remove('open');
-      menuButton.setAttribute('aria-expanded', 'false');
-      menuButton.querySelector('i').className = 'ti ti-menu-2';
-    });
   }
 
   var clientTrack = document.querySelector('.client-track');
