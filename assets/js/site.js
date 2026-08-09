@@ -134,6 +134,149 @@
     });
   });
 
+  var projectCards = document.querySelectorAll('.project-card');
+  var projectDialog = document.querySelector('#project-dialog');
+  if (projectDialog && projectCards.length) {
+    var projectDialogType = projectDialog.querySelector('#project-dialog-type');
+    var projectDialogTitle = projectDialog.querySelector('#project-dialog-title');
+    var projectDialogDescription = projectDialog.querySelector('#project-dialog-description');
+    var projectDialogMeta = projectDialog.querySelector('#project-dialog-meta');
+    var projectDialogLinks = projectDialog.querySelector('#project-dialog-links');
+    var projectDialogVisual = projectDialog.querySelector('#project-dialog-visual');
+    var projectDialogClose = projectDialog.querySelector('.project-dialog-close');
+    var activeProjectCard = null;
+
+    function closeProjectDialog() {
+      if (projectDialog.open && typeof projectDialog.close === 'function') {
+        projectDialog.close();
+      } else {
+        projectDialog.removeAttribute('open');
+        if (activeProjectCard) activeProjectCard.focus();
+      }
+    }
+
+    function openProjectDialog(card) {
+      var copy = card.querySelector('.project-copy');
+      var visual = card.querySelector('.project-visual');
+      if (!copy) return;
+
+      activeProjectCard = card;
+      projectDialogType.textContent = copy.querySelector('.project-type').textContent;
+      projectDialogTitle.textContent = copy.querySelector('h3').textContent;
+      projectDialogDescription.textContent = copy.querySelector('.project-description').textContent;
+      projectDialogMeta.textContent = copy.querySelector('.project-meta').textContent;
+      projectDialogLinks.replaceChildren();
+      projectDialogVisual.replaceChildren();
+
+      var links = copy.querySelector('.project-links');
+      if (links) projectDialogLinks.appendChild(links.cloneNode(true));
+      if (visual) projectDialogVisual.appendChild(visual.cloneNode(true));
+
+      if (typeof projectDialog.showModal === 'function') {
+        projectDialog.showModal();
+      } else {
+        projectDialog.setAttribute('open', '');
+      }
+      projectDialogClose.focus();
+    }
+
+    projectCards.forEach(function (card) {
+      card.addEventListener('click', function (event) {
+        var interactiveTarget = event.target.closest && event.target.closest('a, button');
+        if (interactiveTarget) return;
+        openProjectDialog(card);
+      });
+
+      card.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openProjectDialog(card);
+      });
+    });
+
+    projectDialogClose.addEventListener('click', closeProjectDialog);
+    projectDialog.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      closeProjectDialog();
+    });
+    projectDialog.addEventListener('click', function (event) {
+      if (event.target === projectDialog) closeProjectDialog();
+    });
+    projectDialog.addEventListener('close', function () {
+      if (activeProjectCard) activeProjectCard.focus();
+    });
+  }
+
+  var experienceCards = document.querySelectorAll('.experience-card');
+  var experienceDialog = document.querySelector('#experience-dialog');
+  if (experienceDialog && experienceCards.length) {
+    var experienceDialogTitle = experienceDialog.querySelector('#experience-dialog-title');
+    var experienceDialogSummary = experienceDialog.querySelector('#experience-dialog-summary');
+    var experienceDialogBody = experienceDialog.querySelector('#experience-dialog-body');
+    var experienceDialogClose = experienceDialog.querySelector('.experience-dialog-close');
+    var activeExperienceCard = null;
+
+    function closeExperienceDialog() {
+      if (experienceDialog.open && typeof experienceDialog.close === 'function') {
+        experienceDialog.close();
+      } else {
+        experienceDialog.removeAttribute('open');
+        if (activeExperienceCard) activeExperienceCard.focus();
+      }
+    }
+
+    function openExperienceDialog(card) {
+      var source = card.querySelector('.experience-card-source');
+      if (!source) return;
+
+      activeExperienceCard = card;
+      experienceDialogTitle.textContent = card.getAttribute('data-experience-title');
+      experienceDialogSummary.textContent = card.getAttribute('data-experience-summary');
+      experienceDialogBody.replaceChildren();
+
+      var content = source.firstElementChild && source.firstElementChild.cloneNode(true);
+      if (content) {
+        content.removeAttribute('id');
+        experienceDialogBody.appendChild(content);
+      }
+
+      if (typeof experienceDialog.showModal === 'function') {
+        experienceDialog.showModal();
+      } else {
+        experienceDialog.setAttribute('open', '');
+      }
+      experienceDialogClose.focus();
+    }
+
+    experienceCards.forEach(function (card) {
+      card.addEventListener('click', function (event) {
+        var interactiveTarget = event.target.closest && event.target.closest('a, button');
+        if (interactiveTarget) return;
+        openExperienceDialog(card);
+      });
+
+      card.addEventListener('keydown', function (event) {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openExperienceDialog(card);
+      });
+    });
+
+    experienceDialogClose.addEventListener('click', closeExperienceDialog);
+    experienceDialog.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      closeExperienceDialog();
+    });
+    experienceDialog.addEventListener('click', function (event) {
+      if (event.target === experienceDialog) closeExperienceDialog();
+    });
+    experienceDialog.addEventListener('close', function () {
+      if (activeExperienceCard) activeExperienceCard.focus();
+    });
+  }
+
   var revealElements = document.querySelectorAll('.reveal');
   if (reduceMotion || !('IntersectionObserver' in window)) {
     revealElements.forEach(function (element) { element.classList.add('in'); });
