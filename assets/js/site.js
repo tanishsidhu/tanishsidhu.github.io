@@ -10,6 +10,10 @@
     if (themeColor) themeColor.setAttribute('content', isDark ? '#212121' : '#faf9f5');
   }
 
+  function revealSite() {
+    document.documentElement.classList.add('site-revealed');
+  }
+
   setTheme(systemTheme && systemTheme.matches ? 'dark' : 'light');
   if (systemTheme) {
     var syncSystemTheme = function (event) {
@@ -49,18 +53,22 @@
     if (reduceMotion) {
       spans.forEach(function (span) { span.classList.add('inked'); });
       handwriting.classList.add('complete');
+      revealSite();
       return;
     }
 
     handwriting.classList.add('writing');
     var index = 0;
 
+    function finishHandwriting() {
+      handwriting.classList.remove('writing');
+      handwriting.classList.add('complete');
+      revealSite();
+    }
+
     function writeCharacter() {
       if (index >= spans.length) {
-        window.setTimeout(function () {
-          handwriting.classList.remove('writing');
-          handwriting.classList.add('complete');
-        }, 420);
+        finishHandwriting();
         return;
       }
 
@@ -70,6 +78,10 @@
       var y = character.offsetTop + (character.offsetHeight * 0.58);
       pen.style.transform = 'translate(' + x + 'px, ' + y + 'px) rotate(-28deg)';
       index += 1;
+      if (index >= spans.length) {
+        finishHandwriting();
+        return;
+      }
       window.setTimeout(writeCharacter, character.textContent === ' ' ? 38 : 78);
     }
 
