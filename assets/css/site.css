@@ -42,6 +42,7 @@ html[data-theme="dark"] {
 }
 
 * { box-sizing: border-box; }
+main { position: relative; }
 html { scroll-behavior: smooth; scroll-padding-top: 24px; background-color: var(--paper); }
 body {
   margin: 0;
@@ -115,7 +116,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .experience-client-band .client-logo img { height: 28px; max-width: 96px; }
 .experience-client-band .client-logo-eplus img { height: 34px; max-width: 74px; }
 
-.section { max-width: var(--max); margin: 0 auto; padding: 96px 32px; }
+.section { position: relative; max-width: var(--max); margin: 0 auto; padding: 96px 32px; }
 .section-heading { margin-bottom: 40px; }
 .kicker, .panel-label, .project-type { margin: 0 0 12px; color: var(--muted); font-size: 14px; font-weight: 600; }
 .section-heading h2 { max-width: 950px; margin: 0; font-size: clamp(45px, 5.2vw, 78px); line-height: 1; letter-spacing: -0.055em; font-weight: 800; text-wrap: balance; }
@@ -144,7 +145,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .company-bar p a:hover { color: var(--blue); }
 .company-bar p a i { font-size: 14px; }
 .experience-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 14px; background: white; }
-.experience-card { min-width: 0; height: 360px; overflow: hidden; border: 1px solid rgba(0,0,0,.05); border-radius: 18px; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+.experience-card { position: relative; min-width: 0; height: 360px; overflow: hidden; border: 1px solid rgba(0,0,0,.05); border-radius: 18px; cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
 .experience-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .experience-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 .experience-card-visual { height: 100%; overflow: hidden; }
@@ -345,7 +346,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .projects-section { max-width: none; background: var(--soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .projects-section > * { max-width: var(--max); margin-left: auto; margin-right: auto; }
 .project-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
-.project-card { display: flex; flex-direction: column; min-height: 0; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(0,0,0,.05); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.project-card { position: relative; display: flex; flex-direction: column; min-height: 0; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid rgba(0,0,0,.05); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
 .project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .project-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
 .project-blue { background: var(--blue-soft); }
@@ -579,6 +580,32 @@ html.js:not(.site-revealed) main > .section,
 html.js:not(.site-revealed) .site-footer { opacity: 0; transform: translateY(22px); pointer-events: none; }
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s cubic-bezier(.2,.7,.2,1), transform .65s cubic-bezier(.2,.7,.2,1); }
 .js .reveal.in { opacity: 1; transform: none; }
+/* scroll cue at section borders */
+.scroll-arrow { position: absolute; left: 50%; top: -17px; transform: translateX(-50%); z-index: 30; display: grid; place-items: center; width: 34px; height: 34px; padding: 0; color: var(--muted); background: var(--paper); border: 1px solid var(--line); border-radius: 50%; box-shadow: 0 4px 14px rgba(30,28,22,.1); cursor: pointer; transition: color .25s ease, transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.scroll-arrow i { font-size: 17px; transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.scroll-arrow:hover { color: var(--blue); border-color: var(--blue); box-shadow: 0 6px 18px rgba(30,28,22,.14); }
+.scroll-arrow.flipped { transform: translateX(-50%) rotate(180deg); }
+html.js:not(.site-revealed) .scroll-arrow { opacity: 0; pointer-events: none; }
+html.js .scroll-arrow { opacity: 1; transition: opacity .9s ease .3s; }
+
+/* tap affordance badge on overlay cards */
+.tap-badge { position: absolute; top: 14px; right: 14px; z-index: 5; display: grid; place-items: center; width: 26px; height: 26px; color: rgba(28,26,22,.72); background: rgba(255,255,255,.8); border: 1px solid rgba(255,255,255,.95); border-radius: 50%; box-shadow: 0 4px 12px rgba(30,28,22,.16); backdrop-filter: blur(4px); opacity: .9; transition: transform .25s ease, opacity .25s ease; }
+.tap-badge i { font-size: 15px; }
+.project-card:hover .tap-badge, .experience-card:hover .tap-badge { opacity: 1; transform: translateY(-2px); }
+html[data-theme="dark"] .tap-badge { color: rgba(235,235,235,.82); background: rgba(38,38,38,.78); border-color: rgba(255,255,255,.12); box-shadow: 0 4px 12px rgba(0,0,0,.35); }
+
+/* beat overlay */
+.beat-dialog { width: min(880px, calc(100% - 32px)); height: min(640px, calc(100dvh - 48px)); max-height: calc(100dvh - 32px); padding: 0; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 34px 90px rgba(20,18,14,.36); }
+.beat-dialog::backdrop { background: rgba(20,20,18,.62); backdrop-filter: blur(10px); }
+.beat-dialog-panel { height: 100%; padding: 18px; }
+.beat-dialog-close { position: absolute; top: 14px; right: 14px; z-index: 3; display: grid; width: 38px; height: 38px; place-items: center; padding: 0; color: rgba(255,255,255,.9); background: rgba(20,20,20,.52); border: 1px solid rgba(255,255,255,.2); border-radius: 50%; box-shadow: 0 6px 18px rgba(0,0,0,.25); backdrop-filter: blur(8px); font-size: 20px; cursor: pointer; transition: color .2s ease, background .2s ease, transform .2s ease; }
+.beat-dialog-close:hover { color: white; background: rgba(20,20,20,.74); transform: scale(1.04); }
+.beat-dialog-frame { position: relative; width: 100%; height: 100%; border-radius: 16px; overflow: hidden; background: var(--soft); }
+.beat-dialog-loading { position: absolute; inset: 0; margin: auto; width: 34px; height: 34px; border: 3px solid var(--line); border-top-color: var(--purple); border-radius: 50%; animation: beat-spin .8s linear infinite; }
+.beat-dialog-iframe { position: relative; z-index: 1; width: 100%; height: 100%; border: 0; }
+@keyframes beat-spin { to { transform: rotate(360deg); } }
+
+
 @media (max-width: 1100px) {
   .experience-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

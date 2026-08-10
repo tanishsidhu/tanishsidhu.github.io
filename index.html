@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Montserrat:wght@600;700;800&amp;family=Noto+Sans+Devanagari:wght@600&amp;family=Noto+Sans+Gurmukhi:wght@600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link rel="stylesheet" href="assets/css/site.css?v=20260810y">
+  <link rel="stylesheet" href="assets/css/site.css?v=20260810aa">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -39,7 +39,7 @@
         <h1 class="handwritten" data-handwriting="Tanish Sidhu">Tanish Sidhu</h1>
         <div class="hero-story-grid">
           <section class="hero-story hero-story-work" aria-label="Work introduction">
-            <p class="hero-story-text">Hi. I'm an experienced Software Engineer passionate about AI-native products and agentic AI workflows. Let's connect!</p>
+            <p class="hero-story-text">Hi. I'm an experienced Software Engineer building AI-native products and agentic AI workflows that solve real problems. Let's connect!</p>
             <div class="hero-actions">
               <div class="contact-links" aria-label="Contact links">
                 <a class="social-button social-github" href="https://github.com/tanishsidhu" target="_blank" rel="noopener" aria-label="Tanishpreet on GitHub"><i class="ti ti-brand-github" aria-hidden="true"></i></a>
@@ -53,36 +53,41 @@
             <img class="hero-avatar" src="assets/img/tanish-social.jpg" width="1133" height="1199" alt="Tanishpreet Singh Sidhu smiling" loading="eager">
           </div>
           <section class="hero-story hero-story-personal" aria-label="Personal introduction">
-            <p class="hero-story-text">And if you aren't here for work, then here's some of my favorite songs and films that move me.</p>
-            <a class="hero-beat-link" href="https://tanishonthebeat.vercel.app/" target="_blank" rel="noopener" aria-label="Visit Tanish on the Beat" title="Visit Tanish on the Beat">
+            <p class="hero-story-text">And there’s more to me than work. Here’s a little taste of the music and films I love. Maybe we have something in common.</p>
+            <button class="hero-beat-link" type="button" aria-haspopup="dialog" aria-controls="beat-dialog" aria-label="Open Tanish on the Beat">
               <img class="hero-beat-apple-logo" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Apple_Music_Icon.svg" alt="" width="30" height="30">
               <span class="hero-beat-plus" aria-hidden="true">+</span>
               <span class="hero-beat-letterboxd-logo"><img src="https://a.ltrbxd.com/logos/letterboxd-decal-l-grad2-rgb.svg" alt="" width="30" height="30"></span>
-            </a>
+            </button>
           </section>
         </div>
       </div>
     </header>
 
     <section class="section projects-section" id="projects">
+      <button class="scroll-arrow" type="button" data-next="projects" aria-label="Scroll to projects"><i class="ti ti-chevron-down" aria-hidden="true"></i></button>
       <div class="section-heading reveal">
         <p class="kicker">Projects and Engagements</p>
         <h2>Built for real-world problems.</h2>
       </div>
       <div class="project-grid">
         <article class="project-card project-blue reveal" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View details for Payload-Gen">
-          <div class="project-copy"><p class="project-type">AI engineering</p><h3>Payload-Gen</h3><p class="project-description">Natural language to API payload generator combining RAG for schema retrieval with a locally fine-tuned Llama 3B model. Deterministic evaluation achieved 95% valid JSON on unseen enterprise API specs — a secure, low-latency, on-premise alternative to frontier models.</p><div class="project-meta">Llama 3B · RAG · Fine-Tuning · Python</div><div class="project-detail-hint">View details <i class="ti ti-arrow-up-right" aria-hidden="true"></i></div><div class="project-links"><a href="https://github.com/tanishsidhu/payloadgen" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
+          <span class="tap-badge" aria-hidden="true"><i class="ti ti-chevrons-down"></i></span>
+          <div class="project-copy"><p class="project-type">AI engineering</p><h3>Payload-Gen</h3><p class="project-description">Natural language to API payload generator combining RAG for schema retrieval with a locally fine-tuned Llama 3B model. Deterministic evaluation achieved 95% valid JSON on unseen enterprise API specs — a secure, low-latency, on-premise alternative to frontier models.</p><div class="project-meta">Llama 3B · RAG · Fine-Tuning · Python</div><div class="project-detail-hint tap-hint">View details <i class="ti ti-arrow-up-right" aria-hidden="true"></i></div><div class="project-links"><a href="https://github.com/tanishsidhu/payloadgen" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
           <div class="project-visual payload-visual" aria-hidden="true"><div class="mini-window"><div class="window-bar"><i></i><i></i><i></i></div><code>{<br>&nbsp;&nbsp;"intent": "create",<br>&nbsp;&nbsp;"valid": <b>true</b><br>}</code><span class="valid-pill">95% valid JSON</span></div></div>
         </article>
         <article class="project-card project-yellow reveal" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View details for Support-Agent">
+          <span class="tap-badge" aria-hidden="true"><i class="ti ti-chevrons-down"></i></span>
           <div class="project-copy"><p class="project-type">Agentic workflows</p><h3>Support-Agent</h3><p class="project-description">Autonomous support agent prototype using agentic loop architecture and DeepSeek for enterprise ticket classification. Retrieval pulls resolution evidence from historical documentation, enabling the agent to draft highly accurate, cited responses.</p><div class="project-meta">Agentic Loop · DeepSeek · RAG</div><div class="project-detail-hint">View details <i class="ti ti-arrow-up-right" aria-hidden="true"></i></div><div class="project-links"><a href="https://github.com/tanishsidhu/supportagent" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
           <div class="project-visual support-visual" aria-hidden="true"><div class="ticket"><span class="ticket-icon"><i class="ti ti-headset"></i></span><div><small>Support request</small><strong>Draft response ready</strong></div><span class="status-dot"></span></div><div class="answer-card"><i class="ti ti-sparkles"></i><span>Grounded in retrieved evidence</span></div></div>
         </article>
         <article class="project-card project-red reveal" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View details for Pokrit">
+          <span class="tap-badge" aria-hidden="true"><i class="ti ti-chevrons-down"></i></span>
           <div class="project-copy"><p class="project-type">AI SaaS</p><h3>Pokrit</h3><p class="project-description">End-to-end AI SaaS that autonomously scrapes job boards and uses language models to match live listings against user résumés. C# .NET 8 Azure Functions and Supabase backend with a Next.js frontend, generating daily digest emails with fit scores and automated cover letters.</p><div class="project-meta">Next.js · .NET 8 · Azure Functions · Supabase · Claude API</div><div class="project-detail-hint">View details <i class="ti ti-arrow-up-right" aria-hidden="true"></i></div><div class="project-links"><a href="https://pokrit.vercel.app/" target="_blank" rel="noopener">Live <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
           <div class="project-visual pokrit-visual" aria-hidden="true"><div class="match-card"><div class="match-score">92</div><div><small>Strong match</small><strong>Senior Software Engineer</strong><span>AI-generated fit analysis</span></div></div><div class="match-card rear"></div></div>
         </article>
         <article class="project-card project-green reveal" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View details for PeakOrLow">
+          <span class="tap-badge" aria-hidden="true"><i class="ti ti-chevrons-down"></i></span>
           <div class="project-copy"><p class="project-type">Market intelligence</p><h3>PeakOrLow</h3><p class="project-description">Full stack market briefing web app in C# and ASP.NET Core, integrated with the Anthropic Claude API to process data and generate automated intelligence summaries. Hosted on Azure with a cost-optimised caching architecture.</p><div class="project-meta">C# · ASP.NET · Azure · Claude API</div><div class="project-detail-hint">View details <i class="ti ti-arrow-up-right" aria-hidden="true"></i></div><div class="project-links"><a href="https://github.com/tanishsidhu/PeakOrLow" target="_blank" rel="noopener">Code <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a><a href="https://peakorlow.azurewebsites.net/" target="_blank" rel="noopener">Live <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a></div></div>
           <div class="project-visual market-visual" aria-hidden="true"><div class="chart-card"><span>Market briefing</span><svg viewBox="0 0 360 150" preserveAspectRatio="none"><path class="chart-fill" d="M0 140 L0 105 L45 112 L90 76 L135 88 L180 48 L225 64 L270 24 L315 42 L360 10 L360 140 Z"></path><path class="chart-line" d="M0 105 L45 112 L90 76 L135 88 L180 48 L225 64 L270 24 L315 42 L360 10"></path></svg></div></div>
         </article>
@@ -110,6 +115,7 @@
     </dialog>
 
     <section class="section experience-section" id="experience">
+      <button class="scroll-arrow" type="button" data-next="experience" aria-label="Scroll to experience"><i class="ti ti-chevron-down" aria-hidden="true"></i></button>
       <div class="section-heading reveal">
         <p class="kicker">Experience</p>
         <h2>Seven years, one connected journey.</h2>
@@ -146,7 +152,8 @@
         </div>
         <div class="experience-card-grid">
           <article class="experience-card experience-card-progression" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="experience-dialog" aria-label="View details for Career progression" data-experience-title="Career progression" data-experience-summary="From first commit to technical leadership at Odessa, across India and Serbia.">
-            <div class="experience-card-visual experience-preview-progression" aria-hidden="true">
+            <span class="tap-badge" aria-hidden="true"><i class="ti ti-chevrons-down"></i></span>
+              <div class="experience-card-visual experience-preview-progression" aria-hidden="true">
               <div class="preview-mark preview-mark-trajectory">
                 <span class="ladder-glow"></span>
                 <span class="ladder-rail ladder-rail-left"></span>
@@ -191,7 +198,8 @@
           </article>
 
           <article class="experience-card experience-card-highlights" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="experience-dialog" aria-label="View details for What the progression represents" data-experience-title="What the progression represents" data-experience-summary="The enterprise delivery, technical ownership, and applied AI work behind the career progression.">
-            <div class="experience-card-visual experience-preview-highlights" aria-hidden="true">
+            <span class="tap-badge" aria-hidden="true"><i class="ti ti-chevrons-down"></i></span>
+              <div class="experience-card-visual experience-preview-highlights" aria-hidden="true">
               <div class="preview-mark preview-mark-code">
                 <span class="code-window">
                   <span class="code-window-bar">
@@ -233,7 +241,8 @@
           </article>
 
           <article class="experience-card experience-card-journey" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="experience-dialog" aria-label="View details for The people behind the journey" data-experience-title="The people behind the journey" data-experience-summary="A photo collage of the people and moments behind the Odessa journey.">
-            <div class="experience-card-visual experience-preview-journey" aria-hidden="true">
+            <span class="tap-badge" aria-hidden="true"><i class="ti ti-chevrons-down"></i></span>
+              <div class="experience-card-visual experience-preview-journey" aria-hidden="true">
               <div class="preview-mark preview-mark-people">
                 <span class="team-backdrop"></span>
                 <span class="team-table"></span>
@@ -286,6 +295,7 @@
     </dialog>
 
     <section class="section education-section" id="education">
+      <button class="scroll-arrow" type="button" data-next="education" aria-label="Scroll to education"><i class="ti ti-chevron-down" aria-hidden="true"></i></button>
       <div class="section-heading reveal">
         <p class="kicker">Education</p>
         <h2>Foundations and fluency.</h2>
@@ -340,6 +350,16 @@
       </div>
     </section>
 
+      <dialog class="beat-dialog" id="beat-dialog" aria-label="Tanish on the Beat">
+        <div class="beat-dialog-panel">
+          <div class="beat-dialog-frame">
+            <button class="beat-dialog-close" type="button" aria-label="Close Tanish on the Beat"><i class="ti ti-x" aria-hidden="true"></i></button>
+            <span class="beat-dialog-loading" aria-hidden="true"></span>
+            <iframe class="beat-dialog-iframe" src="https://tanishonthebeat.vercel.app/" title="Tanish on the Beat" loading="lazy" allow="clipboard-write"></iframe>
+          </div>
+        </div>
+      </dialog>
+
   </main>
 
   <footer class="site-footer">
@@ -347,6 +367,6 @@
     <a href="#top">Back to top <i class="ti ti-arrow-up" aria-hidden="true"></i></a>
   </footer>
 
-  <script src="assets/js/site.js?v=20260810w"></script>
+  <script src="assets/js/site.js?v=20260810aa"></script>
 </body>
 </html>
