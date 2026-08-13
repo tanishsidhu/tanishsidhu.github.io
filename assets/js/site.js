@@ -232,6 +232,9 @@
       var content = source.firstElementChild && source.firstElementChild.cloneNode(true);
       if (content) {
         content.removeAttribute('id');
+        content.querySelectorAll('.panel-label').forEach(function (label) {
+          label.remove();
+        });
         experienceDialogBody.appendChild(content);
       }
 

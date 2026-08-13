@@ -1,0 +1,9 @@
+# Local AI assistant tooling and instructions
+.claude/
+.codex/
+.agents/
+AGENTS.md
+CLAUDE.md
+CODEX.md
+GEMINI.md
+COPILOT.md
