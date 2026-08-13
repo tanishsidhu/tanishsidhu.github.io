@@ -276,7 +276,7 @@
 
 
   // Tanish on the Beat overlay
-  var beatButtons = document.querySelectorAll('.hero-beat-link, .off-clock-link');
+  var beatButtons = document.querySelectorAll('.off-clock-link');
   var beatDialog = document.querySelector('#beat-dialog');
   if (beatButtons.length && beatDialog) {
     var activeBeatButton = null;
