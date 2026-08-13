@@ -273,14 +273,16 @@
 
 
   // Tanish on the Beat overlay
-  var beatButton = document.querySelector('.hero-beat-link');
+  var beatButtons = document.querySelectorAll('.hero-beat-link, .off-clock-link');
   var beatDialog = document.querySelector('#beat-dialog');
-  if (beatButton && beatDialog) {
+  if (beatButtons.length && beatDialog) {
+    var activeBeatButton = null;
     var beatDialogClose = beatDialog.querySelector('.beat-dialog-close');
     var beatDialogLoading = beatDialog.querySelector('.beat-dialog-loading');
     var beatFrame = beatDialog.querySelector('.beat-dialog-iframe');
 
-    function openBeatDialog() {
+    function openBeatDialog(event) {
+      activeBeatButton = event.currentTarget;
       if (typeof beatDialog.showModal === 'function') {
         beatDialog.showModal();
       } else {
@@ -295,10 +297,12 @@
       } else {
         beatDialog.removeAttribute('open');
       }
-      beatButton.focus();
+      if (activeBeatButton) activeBeatButton.focus();
     }
 
-    beatButton.addEventListener('click', openBeatDialog);
+    beatButtons.forEach(function (beatButton) {
+      beatButton.addEventListener('click', openBeatDialog);
+    });
     beatDialogClose.addEventListener('click', closeBeatDialog);
     beatDialog.addEventListener('keydown', function (event) {
       if (event.key !== 'Escape') return;
@@ -309,7 +313,7 @@
       if (event.target === beatDialog) closeBeatDialog();
     });
     beatDialog.addEventListener('close', function () {
-      beatButton.focus();
+      if (activeBeatButton) activeBeatButton.focus();
     });
     if (beatFrame) {
       beatFrame.addEventListener('load', function () {
