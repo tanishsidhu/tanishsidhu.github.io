@@ -2,6 +2,8 @@
 .claude/
 .codex/
 .agents/
+.cursor/
+opencode.json
 AGENTS.md
 CLAUDE.md
 CODEX.md
